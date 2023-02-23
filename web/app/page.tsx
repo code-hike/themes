@@ -1,5 +1,7 @@
+import { Preview } from "./preview";
 import { ThemeForm } from "./theme-form";
 import { cn } from "@/lib/utils";
+import { Editor } from "./editor";
 
 export default function Page() {
   return (
@@ -14,7 +16,9 @@ export default function Page() {
 function Main() {
   return (
     <main className="fixed flex items-center h-full w-full justify-center mono">
-      <div className="bg-slate-900 w-80 h-40">foo bar</div>
+      <div className="bg-slate-900 w-80 h-40">
+        <Preview />
+      </div>
     </main>
   );
 }
@@ -30,5 +34,5 @@ function LeftColumn() {
 }
 
 function RightColumn() {
-  return <div className={cn(columnClasses, "w-60 right-0")}></div>;
+  return <div className={cn(columnClasses, "w-60 right-0")}><Editor/></div>;
 }

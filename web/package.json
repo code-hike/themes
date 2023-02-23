@@ -41,14 +41,17 @@
     "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
     "cmdk": "^0.1.21",
+    "jotai": "^2.0.2",
     "lucide-react": "0.105.0-alpha.4",
+    "mitt": "^3.0.0",
     "next": "^13.1.6",
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sharp": "^0.31.3",
     "tailwind-merge": "^1.8.0",
-    "tailwindcss-animate": "^1.0.5"
+    "tailwindcss-animate": "^1.0.5",
+    "zustand": "^4.3.3"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",

@@ -3,6 +3,7 @@
 import dracula from "../themes/dracula.json";
 import minLight from "../themes/min-light.json";
 import monokai from "../themes/monokai.json";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -11,21 +12,25 @@ import {
   SelectGroup,
   SelectItem,
   SelectLabel,
-  SelectSeparator,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
+import { setCode, setLang, setTheme, useCode, useLang } from "./store";
 
 const themes = [monokai, dracula, minLight];
 
 export function ThemeForm() {
   const [themeName, setThemeName] = useState("my-theme");
   const [baseThemeName, setBaseThemeName] = useState("dracula");
+
+  const code = useCode();
+  const lang = useLang();
+
   return (
-    <>
+    <div className="flex flex-col h-full">
       <div className="mb-4">
         <Label htmlFor="theme-name" className="mb-2 block">
           Theme Name
@@ -44,9 +49,11 @@ export function ThemeForm() {
         </Label>
         <Select
           value={baseThemeName}
-          onValueChange={(e) =>
-            setBaseThemeName(themes.find((t) => t.name === e).name)
-          }
+          onValueChange={(e) => {
+            const theme = themes.find((t) => t.name === e);
+            setBaseThemeName(theme.name);
+            setTheme(theme);
+          }}
         >
           <SelectTrigger>
             <SelectValue />
@@ -67,14 +74,25 @@ export function ThemeForm() {
         <Label htmlFor="preview-lang" className="mb-2 block">
           Preview Language
         </Label>
-        <Input id="preview-lang" />
+        <Input
+          id="preview-lang"
+          value={lang}
+          onChange={(e) => setLang(e.target.value)}
+        />
       </div>
       <div className="mb-4">
         <Label htmlFor="preview-code" className="mb-2 block">
           Preview Code
         </Label>
-        <Textarea id="preview-code" className="mono" />
+        <Textarea
+          id="preview-code"
+          className="mono"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+        />
       </div>
-    </>
+      <Separator className="mb-4" />
+      <Button className="w-full">Export...</Button>
+    </div>
   );
 }
