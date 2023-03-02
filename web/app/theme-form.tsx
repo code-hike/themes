@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { setCode, setLang, setTheme, useCode, useLang } from "./store";
 
 const themes = [monokai, dracula, minLight];
@@ -28,6 +28,16 @@ export function ThemeForm() {
 
   const code = useCode();
   const lang = useLang();
+
+  function changeBaseTheme(name: string) {
+    const theme = themes.find((t) => t.name === name);
+    setBaseThemeName(theme.name);
+    setTheme(theme);
+  }
+
+  useEffect(() => {
+    changeBaseTheme(baseThemeName);
+  }, []);
 
   return (
     <div className="flex flex-col h-full">
@@ -50,9 +60,7 @@ export function ThemeForm() {
         <Select
           value={baseThemeName}
           onValueChange={(e) => {
-            const theme = themes.find((t) => t.name === e);
-            setBaseThemeName(theme.name);
-            setTheme(theme);
+            changeBaseTheme(e);
           }}
         >
           <SelectTrigger>

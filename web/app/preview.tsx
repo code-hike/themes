@@ -5,12 +5,12 @@ import { setSelection, useResult } from "./store";
 export function Preview() {
   const result = useResult();
 
-  const { lines, waitingFor } = result;
+  const { lines, waitingFor, colors } = result;
   if (!lines) return null;
 
   return (
     <>
-      <pre className="p-2">
+      <pre className="p-2 rounded" style={{ background: colors.background }}>
         <code>
           {lines.map((l, i) => (
             <div key={i}>

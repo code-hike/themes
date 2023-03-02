@@ -1,3 +1,5 @@
+import { highlightWithScopes as h } from "@code-hike/lighter";
+
 function randomColor() {
   const letters = "0123456789ABCDEF";
   let color = "#";
@@ -8,18 +10,10 @@ function randomColor() {
 }
 
 export async function highlight(code, lang, theme, id) {
-  const lines = code.split("\n").map((line) => {
-    return line.split(/(\s)/g).map((word) => {
-      const token = {
-        content: word,
-        style: { color: randomColor() },
-        scope: "var",
-      };
-      return token;
-    });
-  });
-  await wait(1000);
-  return { lines, id };
+  // const lines = code.split("\n").map((line) => {
+  const r = await h(code, lang, theme);
+  // console.log(r);
+  return { id, ...r };
 }
 
 async function wait(ms) {

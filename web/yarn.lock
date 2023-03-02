@@ -9,6 +9,11 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
+"@code-hike/lighter@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@code-hike/lighter/-/lighter-0.5.1.tgz#86975f44d970f487d5a00a754f9564812ad34f5e"
+  integrity sha512-SECX9tY28M+a9bF1JVi8r6gAs7nUlZfpi9tYwd/DJKnJMEmsjMbzNWs8C8GVkI+9gZAGdtdX3H4VEj9KYwdUJg==
+
 "@floating-ui/core@^0.7.3":
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-0.7.3.tgz#d274116678ffae87f6b60e90f88cc4083eefab86"
@@ -400,6 +405,11 @@
     "@radix-ui/react-presence" "1.0.0"
     "@radix-ui/react-primitive" "1.0.1"
     "@radix-ui/react-use-controllable-state" "1.0.0"
+
+"@radix-ui/react-icons@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-icons/-/react-icons-1.2.0.tgz#aec2b19e84a9997617fbbe0863c8e78ee870dbfa"
+  integrity sha512-NqrZxn+Ig6c6MypUt84/Nab9WBFXH75T1mhEhFjPlIYaNkp113pqlo6QdK5r7zb3b7RckDAPgUQACes0aKwcFA==
 
 "@radix-ui/react-id@1.0.0":
   version "1.0.0"

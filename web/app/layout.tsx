@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html className="dark">
       <head />
-      <body className="min-h-screen bg-white font-sans text-slate-900 antialiased dark:bg-slate-800 dark:text-slate-50">
+      <body className="min-h-screen bg-white font-sans text-slate-900 antialiased dark:bg-slate-600 dark:text-slate-50">
         <style
           dangerouslySetInnerHTML={{
             __html: `:root { --font-sans: ${fontSans.style.fontFamily}; }`,

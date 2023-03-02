@@ -1,20 +1,39 @@
 import { highlight } from "./highlighter";
 import { store, sub, useStore } from "./storer";
-import monokai from "../themes/monokai.json";
 
-const codeStore = store("const a = 1");
+const codeStore = store(`function lorem(ipsum, dolor = 1) {
+  const sit = ipsum == null ? 0 : ipsum.sit;
+  dolor = sit - amet(dolor);
+  return dolor;
+}
+
+function consectetur(...adipiscing) {
+  const elit = adipiscing[0];
+  return sed.eiusmod(elit) ? elit : [elit];
+}`);
 const langStore = store("js");
-const themeStore = store(monokai);
+const themeStore = store(null);
 const resultStore = store<any>({});
 
 let highlights = 0;
 
+let worker = null;
+
 sub([codeStore, langStore, themeStore], async (code, lang, theme) => {
+  if (!theme) return;
+  if (!worker) {
+    worker = new Worker(new URL("../worker.ts", import.meta.url));
+    worker.onmessage = (event: MessageEvent<any>) => {
+      const result = event.data;
+      if (result.id < highlights) return;
+      resultStore.set({ ...result, waitingFor: null });
+    };
+  }
   const waitingFor = ++highlights;
+
+  // TODO avoid re-rendering the whole tokens when waiting for a highlight
   resultStore.set({ ...resultStore.get(), waitingFor });
-  const result = await highlight(code, lang, theme, waitingFor);
-  if (result.id < highlights) return;
-  resultStore.set({ ...result, waitingFor: null });
+  worker.postMessage({ code, lang, theme, id: waitingFor });
 });
 
 export function setCode(code: string) {
@@ -41,7 +60,12 @@ export function useResult() {
 }
 
 // ...
-type Selection = { scope: string; content: string; style: any };
+type Selection = {
+  scope: string;
+  content: string;
+  style: any;
+  scopes?: string[];
+};
 const selectionStore = store<Selection | null>(null);
 
 export function setSelection(selection) {
