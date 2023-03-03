@@ -117,8 +117,8 @@ function TokenEditor({ token, result }) {
           color={color}
           presetColors={palette}
           onChange={(color) => {
-            editTheme(color, fontStyle);
-            setColor(color);
+            editTheme(color.hexa, fontStyle);
+            setColor(color.hexa);
           }}
         />
         <FontEditor
