@@ -12,3 +12,20 @@ export function getPalette(theme) {
   );
   return palette;
 }
+
+export function fixTheme(theme) {
+  // add global setting if missing
+
+  if (!theme.tokenColors.find((rule) => !rule.scope)) {
+    theme.tokenColors.push({
+      name: "Global",
+      scope: "",
+      settings: {
+        foreground: theme.foreground,
+        background: theme.background,
+      },
+    });
+  }
+
+  return theme;
+}

@@ -75,6 +75,7 @@ function TokenEditor({ token, result }) {
 
   function editTheme(color, fontStyle) {
     const matchedRule = getBestMatchRule(theme, token.scopes.slice().reverse());
+
     const ruleIndex = theme.tokenColors.findIndex(
       (r) => r.name === matchedRule.name && r.scope === matchedRule.scope
     );

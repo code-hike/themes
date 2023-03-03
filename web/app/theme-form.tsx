@@ -19,6 +19,7 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
 import { setCode, setLang, setTheme, useCode, useLang } from "./store";
+import { fixTheme } from "./theme-utils";
 
 const themes = [monokai, dracula, minLight];
 
@@ -32,6 +33,9 @@ export function ThemeForm() {
   function changeBaseTheme(name: string) {
     const theme = themes.find((t) => t.name === name);
     setBaseThemeName(theme.name);
+
+    const fixedTheme = fixTheme(theme);
+
     setTheme(theme);
   }
 

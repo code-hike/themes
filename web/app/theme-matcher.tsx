@@ -13,6 +13,11 @@ export function getBestMatchRule(theme: any, scopes: string[]) {
       // console.log({ rule, score, scopes: scopesDescending });
     }
   }
+
+  if (!bestRule) {
+    // return global rule
+    return rules.find((rule) => !rule.scope);
+  }
   return bestRule;
 }
 
