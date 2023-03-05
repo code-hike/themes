@@ -56,10 +56,14 @@ export function Editor() {
     <ColorsEditor colorKey={selection.key} key={selection.key} />
   );
 }
-const colorKeys = ["editor.background", "editor.foreground"];
+const colorKeys = [
+  "editor.background",
+  "editor.foreground",
+  "editorLineNumber.foreground",
+];
 function ColorsEditor({ colorKey }) {
   const theme = useTheme();
-  const [color, setColor] = useState(theme.tokenColors[colorKey]);
+  const color = theme.colors[colorKey];
   const palette = useMemo(() => getPalette(theme), []);
 
   function editTheme(color) {

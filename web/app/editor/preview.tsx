@@ -1,12 +1,18 @@
 "use client";
 
-import { setSelection, useResult } from "./store";
+import { setSelection, useResult, useTheme } from "./store";
 
 export function Preview() {
   const result = useResult();
 
   const { lines, waitingFor, colors } = result;
+
+  const theme = useTheme();
+
   if (!lines) return null;
+  const lineCount = lines.length;
+  const lineDigits = lineCount.toString().length;
+  const lineNumberColor = theme.colors["editorLineNumber.foreground"];
 
   return (
     <>
@@ -26,6 +32,25 @@ export function Preview() {
         <code>
           {lines.map((l, i) => (
             <div key={i}>
+              <span
+                className="hover:outline-dotted cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelection({
+                    type: "color",
+                    key: "editorLineNumber.foreground",
+                  });
+                }}
+                style={{
+                  width: lineDigits + "ch",
+                  marginRight: "1.5ch",
+                  display: "inline-block",
+                  textAlign: "right",
+                  color: lineNumberColor,
+                }}
+              >
+                {i + 1}
+              </span>
               {l.map((t, j) => (
                 <span
                   className="hover:outline-dotted cursor-pointer"
