@@ -43,6 +43,7 @@
     "@radix-ui/react-tooltip": "^1.0.3",
     "@uiw/react-color": "^1.1.2",
     "@uiw/react-color-sketch": "^1.1.2",
+    "bright": "^0.7.0",
     "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
     "cmdk": "^0.1.21",

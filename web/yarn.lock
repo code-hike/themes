@@ -16,6 +16,11 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@code-hike/lighter@0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@code-hike/lighter/-/lighter-0.4.1.tgz#65ea4f3011444302b5438e1f99614c57139b680f"
+  integrity sha512-6sYXpIHsklu98o+G8V7TyaxNJrD/2NaHjTIKKqjSRJ/jSY/xo4UNLMEFtMmVAroRmwpLsQVrdChPIsBaNabT8w==
+
 "@code-hike/lighter@^0.5.1":
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/@code-hike/lighter/-/lighter-0.5.1.tgz#86975f44d970f487d5a00a754f9564812ad34f5e"
@@ -1208,6 +1213,13 @@ braces@^3.0.2, braces@~3.0.2:
   integrity sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==
   dependencies:
     fill-range "^7.0.1"
+
+bright@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/bright/-/bright-0.7.0.tgz#7699150f04608c2269dfc25af9b6019565872e0f"
+  integrity sha512-eLItPVH/tgyeOC9T24FsBQ57pSglOPoc1V7eG4XpIQzFNQ1aGYGvlQRAw6NUJk7mnd1EOiyXAVpbCgB400ERrA==
+  dependencies:
+    "@code-hike/lighter" "0.4.1"
 
 browserslist@^4.21.4:
   version "4.21.5"
