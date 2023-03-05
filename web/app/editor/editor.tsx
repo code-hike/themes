@@ -60,6 +60,16 @@ const colorKeys = [
   "editor.background",
   "editor.foreground",
   "editorLineNumber.foreground",
+  "editorGroupHeader.tabsBackground",
+  "tab.activeBackground",
+  "tab.inactiveBackground",
+  "tab.activeForeground",
+  "tab.inactiveForeground",
+  "tab.border",
+  "tab.activeBorder",
+  "tab.activeBorderTop",
+  "editorGroupHeader.tabsBorder",
+  "editor.selectionBackground",
 ];
 function ColorsEditor({ colorKey }) {
   const theme = useTheme();
