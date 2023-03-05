@@ -18,8 +18,16 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
-import { setCode, setLang, setTheme, useCode, useLang } from "./store";
+import {
+  setCode,
+  setLang,
+  setTheme,
+  useCode,
+  useLang,
+  useTheme,
+} from "./store";
 import { fixTheme } from "./theme-utils";
+import { ExportDialog } from "./export-dialog";
 
 const themes = [monokai, dracula, minLight];
 
@@ -36,7 +44,7 @@ export function ThemeForm() {
 
     const fixedTheme = fixTheme(theme);
 
-    setTheme(theme);
+    setTheme(fixedTheme);
   }
 
   useEffect(() => {
@@ -104,7 +112,7 @@ export function ThemeForm() {
         />
       </div>
       <Separator className="mb-4" />
-      <Button className="w-full">Export...</Button>
+      <ExportDialog />
     </div>
   );
 }
