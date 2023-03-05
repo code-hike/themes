@@ -10,7 +10,19 @@ export function Preview() {
 
   return (
     <>
-      <pre className="p-2 rounded" style={{ background: colors.background }}>
+      <pre
+        className="p-2 rounded cursor-pointer"
+        style={{
+          background: colors.background,
+          minWidth: "40ch",
+          maxWidth: "80ch",
+          overflow: "auto",
+          maxHeight: "80vh",
+        }}
+        onClick={() =>
+          setSelection({ type: "color", key: "editor.background" })
+        }
+      >
         <code>
           {lines.map((l, i) => (
             <div key={i}>
@@ -20,14 +32,18 @@ export function Preview() {
                   key={j}
                   style={t.style}
                   children={t.content}
-                  onClick={() => setSelection(t)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelection({ ...t, type: "token" });
+                  }}
                 />
               ))}
+              <br />
             </div>
           ))}
         </code>
       </pre>
-      {waitingFor && <div className="absolute">Waiting for {waitingFor}</div>}
+      {/* {waitingFor && <div className="absolute">Waiting for {waitingFor}</div>} */}
     </>
   );
 }

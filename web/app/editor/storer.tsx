@@ -28,7 +28,13 @@ export function store<T>(initialValue: T): Store<T> {
 
 export function useStore<T>(store: Store<T>) {
   const [value, set] = React.useState(store.get());
-  React.useEffect(() => store.sub(set), [store]);
+  React.useEffect(() => {
+    const unsub = store.sub(set);
+    if (value !== store.get()) {
+      set(store.get());
+    }
+    return unsub;
+  }, [store]);
   return value;
 }
 

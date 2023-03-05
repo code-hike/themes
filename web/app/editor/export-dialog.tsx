@@ -29,9 +29,7 @@ export function ExportDialog() {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Export Theme</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription>
+          <DialogDescription></DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <RadioGroup
@@ -56,8 +54,9 @@ export function ExportDialog() {
               <Label htmlFor="r4">CJS</Label>
             </div>
           </RadioGroup>
-          <Textarea value={output} readOnly rows={20} />
+          <Textarea value={output} readOnly rows={10} />
         </div>
+
         <DialogFooter>
           <Button onClick={() => copyToClipboard(output)}>Copy</Button>
         </DialogFooter>

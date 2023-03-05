@@ -1,8 +1,8 @@
 "use client";
 
-import dracula from "../themes/dracula.json";
-import minLight from "../themes/min-light.json";
-import monokai from "../themes/monokai.json";
+import dracula from "../../themes/dracula.json";
+import minLight from "../../themes/min-light.json";
+import monokai from "../../themes/monokai.json";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -32,7 +32,6 @@ import { ExportDialog } from "./export-dialog";
 const themes = [monokai, dracula, minLight];
 
 export function ThemeForm() {
-  const [themeName, setThemeName] = useState("my-theme");
   const [baseThemeName, setBaseThemeName] = useState("dracula");
 
   const code = useCode();
@@ -53,18 +52,6 @@ export function ThemeForm() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="mb-4">
-        <Label htmlFor="theme-name" className="mb-2 block">
-          Theme Name
-        </Label>
-        <Input
-          id="theme-name"
-          value={themeName}
-          onChange={(e) => {
-            setThemeName(e.target.value);
-          }}
-        />
-      </div>
       <div className="mb-4">
         <Label htmlFor="theme-base" className="mb-2 block">
           Base Theme
@@ -107,6 +94,7 @@ export function ThemeForm() {
         <Textarea
           id="preview-code"
           className="mono"
+          rows={7}
           value={code}
           onChange={(e) => setCode(e.target.value)}
         />

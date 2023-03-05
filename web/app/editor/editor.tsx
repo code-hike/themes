@@ -28,40 +28,81 @@ import {
   FontItalicIcon,
   UnderlineIcon,
 } from "@radix-ui/react-icons";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export function Editor() {
-  const selection = useSelection();
+  const selection = useSelection() || {
+    type: "color",
+    key: "editor.background",
+  };
   const result = useResult();
-  const colors = result.colors;
+  const theme = useTheme();
 
-  return selection ? (
-    <div className="relative">
-      <div className="absolute top-0 right-0">
-        <button
-          className="bg-slate-700 hover:bg-slate-600 text-white rounded-full p-1"
-          onClick={() => setSelection(null)}
-        >
-          <Cross2Icon height="1.1em" width="1.1em" />
-        </button>
-      </div>
-      <div className="h-4" />
-      <TokenEditor
-        token={selection}
-        result={result}
-        key={selection.scopes.toString() + selection.content}
-      />
-
-      {/* <div className="">
-        Scopes:
-        <ul>
-          {selection.scopes.map((scope) => (
-            <li key={scope}>{scope}</li>
-          ))}
-        </ul>
-      </div> */}
-    </div>
+  return !theme ? null : selection.type === "token" ? (
+    <TokenEditor
+      token={selection}
+      result={result}
+      key={selection.scopes.toString() + selection.content}
+    />
   ) : (
-    <div>empty</div>
+    <ColorsEditor colorKey={selection.key} key={selection.key} />
+  );
+}
+const colorKeys = ["editor.background", "editor.foreground"];
+function ColorsEditor({ colorKey }) {
+  const theme = useTheme();
+  const [color, setColor] = useState(theme.tokenColors[colorKey]);
+  const palette = useMemo(() => getPalette(theme), []);
+
+  function editTheme(color) {
+    startTransition(() => {
+      setTheme({
+        ...theme,
+        colors: {
+          ...theme.colors,
+          [colorKey]: color,
+        },
+      });
+    });
+  }
+  return (
+    <div>
+      <Select
+        value={colorKey}
+        onValueChange={(e) => {
+          setSelection({ type: "color", key: e });
+        }}
+      >
+        <SelectTrigger className="mb-4">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {colorKeys.map((ck) => (
+              <SelectItem key={ck} value={ck}>
+                <SelectLabel>{ck}</SelectLabel>
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+      <Sketch
+        className="scheme-light text-black mx-auto mb-2"
+        color={color}
+        presetColors={palette}
+        onChange={(color) => {
+          editTheme(color.hexa);
+        }}
+      />
+    </div>
   );
 }
 
@@ -100,7 +141,16 @@ function TokenEditor({ token, result }) {
   }
 
   return (
-    <>
+    <div className="relative">
+      <div className="absolute top-0 right-0">
+        <button
+          className="bg-slate-700 hover:bg-slate-600 text-white rounded-full p-1"
+          onClick={() => setSelection(null)}
+        >
+          <Cross2Icon height="1.1em" width="1.1em" />
+        </button>
+      </div>
+      <div className="h-4" />
       <Label className="mb-2 block">Selected Token</Label>
       <pre
         className="mb-4 px-2 text-center"
@@ -108,9 +158,7 @@ function TokenEditor({ token, result }) {
       >
         <span style={{ color, fontStyle }}>{token.content}</span>
       </pre>
-
       <Separator className="mb-4" />
-
       {/* <Label className="mb-2 block">Edit Rule</Label> */}
       <div className="mb-4">
         <Sketch
@@ -133,7 +181,7 @@ function TokenEditor({ token, result }) {
       {/* <Button className="w-full" onClick={() => editTheme(color, fontStyle)}>
         Apply
       </Button> */}
-    </>
+    </div>
   );
 }
 

@@ -1,4 +1,3 @@
-import { highlight } from "./highlighter";
 import { store, sub, useStore } from "./storer";
 
 const codeStore = store(`function lorem(ipsum, dolor = 1) {
@@ -22,7 +21,7 @@ let worker = null;
 sub([codeStore, langStore, themeStore], async (code, lang, theme) => {
   if (!theme) return;
   if (!worker) {
-    worker = new Worker(new URL("../worker.ts", import.meta.url));
+    worker = new Worker(new URL("../../worker.ts", import.meta.url));
     worker.onmessage = (event: MessageEvent<any>) => {
       const result = event.data;
       if (result.id < highlights) return;
@@ -60,12 +59,15 @@ export function useResult() {
 }
 
 // ...
-type Selection = {
-  scope: string;
-  content: string;
-  style: any;
-  scopes?: string[];
-};
+type Selection =
+  | {
+      type: "token";
+      scope: string;
+      content: string;
+      style: any;
+      scopes?: string[];
+    }
+  | { type: "color"; key: string };
 const selectionStore = store<Selection | null>(null);
 
 export function setSelection(selection) {
