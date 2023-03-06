@@ -148,7 +148,7 @@ function Tab({ active, theme }) {
           });
         }}
       >
-        {active ? "Active" : "Inactive"}
+        {active ? "Active Tab" : "Inactive Tab"}
       </span>
       {active && (
         <div

@@ -1,5 +1,6 @@
 "use client";
 
+import { parse } from "jsonc-parser/lib/esm/main.js";
 import dracula from "../../themes/dracula.json";
 import minLight from "../../themes/min-light.json";
 import monokai from "../../themes/monokai.json";
@@ -29,6 +30,8 @@ import {
 import { fixTheme } from "./theme-utils";
 import { ExportDialog } from "./export-dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import { unzip } from "unzipit";
 
 const themes = [dracula];
 
@@ -108,12 +111,101 @@ function BaseThemePicker() {
         <TabsContent value="builtin">
           <BuiltInThemePicker />
         </TabsContent>
-        <TabsContent value="vscode"></TabsContent>
+        <TabsContent value="vscode">
+          <MarketplacePicker />
+        </TabsContent>
         <TabsContent value="custom">
           <CustomThemePicker />
         </TabsContent>
       </Tabs>
     </div>
+  );
+}
+
+function MarketplacePicker() {
+  const [url, setUrl] = useState("");
+  const [themes, setThemes] = useState([]);
+  const [selectedTheme, setSelectedTheme] = useState(themes[0]);
+
+  function updateTheme(theme) {
+    setTheme(fixTheme(theme));
+  }
+
+  return (
+    <div>
+      <Label htmlFor="marketplace-url" className="mb-2 block">
+        URL
+      </Label>
+      <Input
+        id="marketplace-url"
+        className="mb-4"
+        value={url}
+        onChange={(e) => {
+          setUrl(e.target.value);
+          fetchFromMarketplace(e.target.value).then((themes) => {
+            setThemes(themes);
+            setSelectedTheme(themes[0]);
+            if (themes[0]) {
+              updateTheme(themes[0]?.theme);
+            }
+          });
+        }}
+        placeholder="https://marketplace.visualstudio.com/items?itemName=sdras.night-owl"
+      />
+      <Label htmlFor="marketplace-theme" className="mb-2 block">
+        Themes
+      </Label>
+      <Select
+        value={selectedTheme?.label}
+        onValueChange={(e) => {
+          const selection = themes.find(({ label }) => label === e);
+          setSelectedTheme(selection);
+          updateTheme(selection.theme);
+        }}
+      >
+        <SelectTrigger id="marketplace-theme">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {themes.map(({ label }) => (
+              <SelectItem key={label} value={label}>
+                <SelectLabel>{label}</SelectLabel>
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </div>
+  );
+}
+async function fetchFromMarketplace(url: string) {
+  const itemName = url.split("itemName=")[1];
+  const [publisher, extId] = itemName.split(".");
+  const downloadUrl =
+    `https://${publisher}.gallery.vsassets.io` +
+    `/_apis/public/gallery/publisher/${publisher}` +
+    `/extension/${extId}/latest` +
+    `/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage`;
+
+  const { entries } = await unzip(downloadUrl);
+  const packagejson = await entries["extension/package.json"].json();
+
+  return await Promise.all(
+    packagejson.contributes.themes.map(async ({ label, path }) => {
+      const fullPath =
+        "extension/" + (path.startsWith("./") ? path.slice(2) : path);
+      const themeFile = entries[fullPath];
+      const rawTheme = await themeFile.text();
+      const errors = [];
+      const theme = parse(rawTheme, errors, {
+        allowTrailingComma: true,
+      });
+      return {
+        label,
+        theme,
+      };
+    })
   );
 }
 
