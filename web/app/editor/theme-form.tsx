@@ -2,8 +2,6 @@
 
 import { parse } from "jsonc-parser/lib/esm/main.js";
 import dracula from "../../themes/dracula.json";
-import minLight from "../../themes/min-light.json";
-import monokai from "../../themes/monokai.json";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -32,6 +30,8 @@ import { ExportDialog } from "./export-dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { unzip } from "unzipit";
+import { LanguagePicker } from "./theme-form.languague";
+import { snippets } from "./snippets";
 
 const themes = [dracula];
 
@@ -72,10 +72,13 @@ export function ThemeForm() {
         <Label htmlFor="preview-lang" className="mb-2 block">
           Preview Language
         </Label>
-        <Input
+        <LanguagePicker
           id="preview-lang"
           value={lang}
-          onChange={(e) => setLang(e.target.value)}
+          onChange={(e) => {
+            setLang(e);
+            setCode(snippets[e]);
+          }}
         />
       </div>
       <div className="mb-4">

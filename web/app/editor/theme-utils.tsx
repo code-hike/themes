@@ -27,5 +27,20 @@ export function fixTheme(theme) {
     });
   }
 
+  theme.type = getColorScheme(theme);
+
   return theme;
+}
+
+function getColorScheme(theme) {
+  const themeType = theme.type
+    ? theme.type
+    : theme.name?.toLowerCase().includes("light")
+    ? "light"
+    : "dark";
+  if (themeType === "light") {
+    return "light";
+  } else {
+    return "dark";
+  }
 }

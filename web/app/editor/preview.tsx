@@ -1,6 +1,7 @@
 "use client";
 
 import { setSelection, useResult, useTheme } from "./store";
+import { getColor } from "./theme-colors";
 
 export function Preview() {
   const result = useResult();
@@ -12,18 +13,21 @@ export function Preview() {
   if (!lines) return null;
   const lineCount = lines.length;
   const lineDigits = lineCount.toString().length;
-  const lineNumberColor = theme.colors["editorLineNumber.foreground"];
+  const lineNumberColor = getColor(theme, "editorLineNumber.foreground");
 
   return (
     <div className="rounded overflow-hidden">
       <style
         dangerouslySetInnerHTML={{
-          __html: `#code-preview ::selection { background-color: ${theme.colors["editor.selectionBackground"]} }`,
+          __html: `#code-preview ::selection { background-color: ${getColor(
+            theme,
+            "editor.selectionBackground"
+          )} }`,
         }}
       />
       <div
         style={{
-          background: theme.colors["editorGroupHeader.tabsBackground"],
+          background: getColor(theme, "editorGroupHeader.tabsBackground"),
           position: "relative",
           display: "flex",
           cursor: "pointer",
@@ -47,7 +51,7 @@ export function Preview() {
             width: "100%",
             height: 1,
             zIndex: 9,
-            background: theme.colors["editorGroupHeader.tabsBorder"],
+            background: getColor(theme, "editorGroupHeader.tabsBorder"),
           }}
           className="hover:outline-dotted cursor-pointer"
         ></div>
@@ -122,14 +126,14 @@ function Tab({ active, theme }) {
   return (
     <span
       style={{
-        background: theme.colors[backgroundKey],
-        color: theme.colors[foregroundKey],
+        background: getColor(theme, backgroundKey),
+        color: getColor(theme, foregroundKey),
         cursor: "pointer",
         display: "inline-block",
         padding: "0.5em 1em",
         position: "relative",
         fontSize: "13px",
-        borderRight: `1px solid ${theme.colors["tab.border"]}`,
+        borderRight: `1px solid ${getColor(theme, "tab.border")}`,
       }}
       onClick={(e) => {
         e.stopPropagation();
@@ -159,7 +163,7 @@ function Tab({ active, theme }) {
             height: 1,
             zIndex: 10,
             width: "100%",
-            background: theme.colors["tab.activeBorder"],
+            background: getColor(theme, "tab.activeBorder"),
           }}
         />
       )}
@@ -172,7 +176,7 @@ function Tab({ active, theme }) {
             height: 1,
             zIndex: 10,
             width: "100%",
-            background: theme.colors["tab.activeBorderTop"],
+            background: getColor(theme, "tab.activeBorderTop"),
           }}
         />
       )}
