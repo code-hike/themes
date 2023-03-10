@@ -27,7 +27,7 @@ export function ThemeForm() {
       <BaseThemePicker onBaseChange={(theme) => setTheme(fixTheme(theme))} />
       <Separator className="mb-4" />
       <div className="mb-4">
-        <Label htmlFor="preview-lang" className="mb-2 block">
+        <Label htmlFor="preview-lang" className="mb-2 block ">
           Preview Language
         </Label>
         <LanguagePicker
