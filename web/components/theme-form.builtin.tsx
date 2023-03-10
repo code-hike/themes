@@ -1,4 +1,4 @@
-import darkPlus from "../../themes/dark-plus.json";
+import darkPlus from "../themes/dark-plus.json";
 import {
   Select,
   SelectContent,

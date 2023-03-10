@@ -1,7 +1,7 @@
-import { Preview } from "./preview";
-import { ThemeForm } from "./theme-form";
+import { Preview } from "@/components/preview";
+import { ThemeForm } from "@/components/theme-form";
 import { cn } from "@/lib/utils";
-import { Editor } from "./editor";
+import { Editor } from "@/components/editor";
 
 export default function Page() {
   return (

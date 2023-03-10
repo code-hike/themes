@@ -1,4 +1,5 @@
-import { parse } from "jsonc-parser/lib/esm/main.js";
+// import { parse } from "jsonc-parser/lib/esm/main.js";
+import { parse } from "jsonc-parser";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
