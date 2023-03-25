@@ -1,23 +1,25 @@
-import { highlightWithScopes as h } from "@code-hike/lighter";
+let worker = null;
 
-function randomColor() {
-  const letters = "0123456789ABCDEF";
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
+let id = 0;
 
-export async function highlight(code, lang, theme, id) {
-  // const lines = code.split("\n").map((line) => {
-  const r = await h(code, lang, theme);
-  // console.log(r);
-  return { id, ...r };
-}
+const callbacks = new Map();
 
-async function wait(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
+export function highlight(code, lang, theme) {
+  const currentId = id++;
+  const promise = new Promise((resolve) => {
+    callbacks.set(currentId, resolve);
   });
+
+  if (!worker) {
+    worker = new Worker(new URL("../worker.ts", import.meta.url));
+    worker.onmessage = (event: MessageEvent<any>) => {
+      const { id, ...result } = event.data;
+      callbacks.get(id)(result);
+      callbacks.delete(id);
+    };
+  }
+
+  worker.postMessage({ code, lang, theme, id: currentId });
+
+  return { promise, waitingFor: currentId };
 }

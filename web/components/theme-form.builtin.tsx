@@ -52,7 +52,6 @@ export function BuiltInThemePicker({ onBaseChange }) {
   return (
     <>
       <Select
-        disabled
         value={state.selected}
         onValueChange={(e) => {
           dispatch({ type: "select", themeName: e });
@@ -77,7 +76,11 @@ export function BuiltInThemePicker({ onBaseChange }) {
                   value={themeName}
                   icon={theme.loading ? spinner : null}
                 >
-                  <SelectLabel>{themeName}</SelectLabel>
+                  <SelectLabel
+                    className={theme.theme ? "text-white" : "text-gray-400"}
+                  >
+                    {themeName}
+                  </SelectLabel>
                 </SelectItem>
               );
             })}

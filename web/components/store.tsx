@@ -1,3 +1,4 @@
+import { highlight } from "./highlighter";
 import { store, sub, useStore } from "./storer";
 
 const codeStore = store(`function lorem(ipsum, dolor = 1) {
@@ -14,25 +15,17 @@ const langStore = store("js");
 const themeStore = store(null);
 const resultStore = store<any>({});
 
-let highlights = 0;
-
-let worker = null;
+let latestWaitingFor = 0;
 
 sub([codeStore, langStore, themeStore], async (code, lang, theme) => {
   if (!theme) return;
-  if (!worker) {
-    worker = new Worker(new URL("../worker.ts", import.meta.url));
-    worker.onmessage = (event: MessageEvent<any>) => {
-      const result = event.data;
-      if (result.id < highlights) return;
-      resultStore.set({ ...result, waitingFor: null });
-    };
-  }
-  const waitingFor = ++highlights;
 
-  // TODO avoid re-rendering the whole tokens when waiting for a highlight
-  resultStore.set({ ...resultStore.get(), waitingFor });
-  worker.postMessage({ code, lang, theme, id: waitingFor });
+  const { promise, waitingFor } = highlight(code, lang, theme);
+  latestWaitingFor = waitingFor;
+  const result: any = await promise;
+  if (latestWaitingFor <= waitingFor) {
+    resultStore.set({ ...result, waitingFor: null });
+  }
 });
 
 export function setCode(code: string) {

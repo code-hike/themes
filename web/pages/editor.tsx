@@ -1,4 +1,3 @@
-import { Preview } from "@/components/preview";
 import { ThemeForm } from "@/components/theme-form";
 import { cn } from "@/lib/utils";
 import { Editor } from "@/components/editor";
@@ -7,6 +6,7 @@ import { Inter as FontSans } from "@next/font/google";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
+import { Main } from "@/components/main";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -67,14 +67,6 @@ export default function Page({ sponsor }) {
       <Main />
       <RightColumn />
     </div>
-  );
-}
-
-function Main() {
-  return (
-    <main className="flex items-center h-full w-full justify-center mono flex-1">
-      <Preview />
-    </main>
   );
 }
 

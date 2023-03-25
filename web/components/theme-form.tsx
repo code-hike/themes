@@ -13,8 +13,6 @@ import {
 } from "./store";
 import { ExportDialog } from "./export-dialog";
 
-import { LanguagePicker } from "./theme-form.languague";
-import { snippets } from "./snippets";
 import { BaseThemePicker } from "./theme-form.base";
 import { fixTheme } from "./theme-utils";
 
@@ -26,19 +24,7 @@ export function ThemeForm() {
     <div className="flex flex-col h-full">
       <BaseThemePicker onBaseChange={(theme) => setTheme(fixTheme(theme))} />
       <Separator className="mb-4" />
-      <div className="mb-4">
-        <Label htmlFor="preview-lang" className="mb-2 block ">
-          Preview Language
-        </Label>
-        <LanguagePicker
-          id="preview-lang"
-          value={lang}
-          onChange={(e) => {
-            setLang(e);
-            setCode(snippets[e]);
-          }}
-        />
-      </div>
+
       <div className="mb-4">
         <Label htmlFor="preview-code" className="mb-2 block">
           Preview Code
