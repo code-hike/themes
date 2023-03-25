@@ -103,4 +103,9 @@ const defaults = {
   "tab.activeBorderTop": { hc: contrastBorder },
   "tab.hoverBackground": "tab.inactiveBackground",
   "tab.hoverForeground": "tab.inactiveForeground",
+  "editorCursor.foreground": {
+    dark: "#AEAFAD",
+    light: "#000000",
+    hc: "#ffffff",
+  },
 };
