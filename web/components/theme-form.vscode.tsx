@@ -40,35 +40,40 @@ export function MarketplacePicker({ onBaseChange }) {
         id="marketplace-url"
         className="mb-4"
         value={url}
+        disabled
         onChange={(e) => {
           onUrlChange(e.target.value);
         }}
         placeholder="https://marketplace.visualstudio.com/items?itemName=sdras.night-owl"
       />
-      <Label htmlFor="marketplace-theme" className="mb-2 block">
-        Themes
-      </Label>
-      <Select
-        value={selectedTheme?.label}
-        onValueChange={(e) => {
-          const selection = themes.find(({ label }) => label === e);
-          setSelectedTheme(selection);
-          onBaseChange(selection.theme);
-        }}
-      >
-        <SelectTrigger id="marketplace-theme">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {themes.map(({ label }) => (
-              <SelectItem key={label} value={label}>
-                <SelectLabel>{label}</SelectLabel>
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+      {themes.length > 0 && (
+        <>
+          <Label htmlFor="marketplace-theme" className="mb-2 block">
+            Themes
+          </Label>
+          <Select
+            value={selectedTheme?.label}
+            onValueChange={(e) => {
+              const selection = themes.find(({ label }) => label === e);
+              setSelectedTheme(selection);
+              onBaseChange(selection.theme);
+            }}
+          >
+            <SelectTrigger id="marketplace-theme">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {themes.map(({ label }) => (
+                  <SelectItem key={label} value={label}>
+                    <SelectLabel>{label}</SelectLabel>
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </>
+      )}
     </div>
   );
 }

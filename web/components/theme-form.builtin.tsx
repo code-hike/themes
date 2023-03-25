@@ -50,38 +50,41 @@ export function BuiltInThemePicker({ onBaseChange }) {
   }, [state.theme]);
 
   return (
-    <Select
-      value={state.selected}
-      onValueChange={(e) => {
-        dispatch({ type: "select", themeName: e });
-        if (state.themes[e].theme != null) {
-          onBaseChange(state.themes[e].theme);
-        } else if (!state.themes[e].loading) {
-          fetchTheme(e);
-        }
-      }}
-      // open={true}
-    >
-      <SelectTrigger icon={state.themes[state.selected].loading && spinner}>
-        <SelectValue />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          {names.map((themeName) => {
-            const theme = state.themes[themeName];
-            return (
-              <SelectItem
-                key={themeName}
-                value={themeName}
-                icon={theme.loading ? spinner : null}
-              >
-                <SelectLabel>{themeName}</SelectLabel>
-              </SelectItem>
-            );
-          })}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <>
+      <Select
+        disabled
+        value={state.selected}
+        onValueChange={(e) => {
+          dispatch({ type: "select", themeName: e });
+          if (state.themes[e].theme != null) {
+            onBaseChange(state.themes[e].theme);
+          } else if (!state.themes[e].loading) {
+            fetchTheme(e);
+          }
+        }}
+        // open={true}
+      >
+        <SelectTrigger icon={state.themes[state.selected].loading && spinner}>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {names.map((themeName) => {
+              const theme = state.themes[themeName];
+              return (
+                <SelectItem
+                  key={themeName}
+                  value={themeName}
+                  icon={theme.loading ? spinner : null}
+                >
+                  <SelectLabel>{themeName}</SelectLabel>
+                </SelectItem>
+              );
+            })}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </>
   );
 }
 
