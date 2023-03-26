@@ -23,7 +23,7 @@ export function ExportDialog() {
     <Dialog>
       <DialogTrigger asChild>
         <Button className="w-full" variant="outline">
-          Export...
+          Export Theme...
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

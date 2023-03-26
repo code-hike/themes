@@ -1,12 +1,5 @@
 import { Preview } from "./preview";
-import {
-  setCode,
-  setLang,
-  setTheme,
-  useCode,
-  useLang,
-  useTheme,
-} from "./store";
+import { setCode, setLang } from "./store";
 
 import { LanguagePicker } from "./language-picker";
 import { snippets } from "./snippets";

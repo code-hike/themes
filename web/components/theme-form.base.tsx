@@ -53,12 +53,12 @@ function SponsorsPopover() {
                 Code Hike sponsor
               </a>{" "}
               for $19 a month to load more themes:
-              <ul className="list-disc list-inside">
-                <li>22 built-in themes</li>
-                <li>Any theme from VS Code</li>
-                <li>Your custom theme</li>
-              </ul>
             </p>
+            <ul className="list-disc list-inside">
+              <li>22 built-in themes</li>
+              <li>Any theme from VS Code</li>
+              <li>Your custom theme</li>
+            </ul>
             <Button variant="outline">Sponsor Code Hike</Button>
             <p>
               If you are a sponsor:
@@ -83,7 +83,7 @@ export function BaseThemePicker({ onBaseChange }) {
         </span>
       </Label>
       <Tabs value={selectedTab} onValueChange={setSelectedTab}>
-        <TabsList className="mb-4">
+        <TabsList className="mb-4 w-full">
           <TabsTrigger value="builtin">Built In</TabsTrigger>
           <TabsTrigger value="vscode">VS Code</TabsTrigger>
           <TabsTrigger value="custom">Custom</TabsTrigger>

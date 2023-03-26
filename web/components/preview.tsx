@@ -9,7 +9,7 @@ import { getColor } from "./theme-colors";
 export function Preview() {
   const result = useResult();
 
-  const [editing, setEditing] = React.useState(true);
+  const [editing, setEditing] = React.useState(false);
 
   const theme = useTheme();
 

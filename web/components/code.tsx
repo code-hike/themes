@@ -86,7 +86,10 @@ export function CodeArea({ code, lang, theme, onDone }) {
           className="z-50 mr-2"
           onClick={() => onDone(input)}
         >
-          <CheckIcon className=" opacity-80 hover:opacity-100 w-5 h-5" />
+          <CheckIcon
+            className=" opacity-80 hover:opacity-100 w-5 h-5"
+            title="Edit Code"
+          />
         </button>
         <textarea
           data-gramm_editor="false"
@@ -165,8 +168,10 @@ function Lines({ code, lang, theme }) {
           >
             {i + 1}
           </span>
-          {tokens.map((token) => (
-            <span style={token.style}>{token.content}</span>
+          {tokens.map((token, i) => (
+            <span style={token.style} key={i}>
+              {token.content}
+            </span>
           ))}
           <br />
         </div>

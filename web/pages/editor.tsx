@@ -63,7 +63,6 @@ export default function Page({ sponsor }) {
         />
       </Head>
 
-      <LeftColumn sponsor={sponsor} />
       <Main />
       <RightColumn />
     </div>
@@ -71,20 +70,6 @@ export default function Page({ sponsor }) {
 }
 
 const columnClasses = "bg-slate-900 h-full px-2 py-4";
-
-function LeftColumn({
-  sponsor,
-}: {
-  sponsor: "sponsor" | "not-sponsor" | "unknown";
-}) {
-  return (
-    <div className={cn(columnClasses, "w-60 left-0")}>
-      <ThemeForm />
-      {/* <button onClick={() => signIn()}>Sign in</button>
-      <button onClick={() => signOut()}>Sign out</button> */}
-    </div>
-  );
-}
 
 function RightColumn() {
   return (

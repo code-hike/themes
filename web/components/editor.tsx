@@ -37,6 +37,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { ExportDialog } from "./export-dialog";
+import { BaseThemePicker } from "./theme-form.base";
+import { fixTheme } from "./theme-utils";
 
 export function Editor() {
   const selection = useSelection() || {
@@ -46,14 +49,23 @@ export function Editor() {
   const result = useResult();
   const theme = useTheme();
 
-  return !theme ? null : selection.type === "token" ? (
-    <TokenEditor
-      token={selection}
-      result={result}
-      key={selection.scopes.toString() + selection.content}
-    />
-  ) : (
-    <ColorsEditor colorKey={selection.key} key={selection.key} />
+  return (
+    <div>
+      <BaseThemePicker onBaseChange={(theme) => setTheme(fixTheme(theme))} />
+
+      <Separator className="mb-4 mt-4" />
+      {!theme ? null : selection.type === "token" ? (
+        <TokenEditor
+          token={selection}
+          result={result}
+          key={selection.scopes.toString() + selection.content}
+        />
+      ) : (
+        <ColorsEditor colorKey={selection.key} key={selection.key} />
+      )}
+      <Separator className="mb-4 mt-4" />
+      <ExportDialog />
+    </div>
   );
 }
 const colorKeys = [
