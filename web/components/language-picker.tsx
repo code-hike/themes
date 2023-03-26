@@ -47,7 +47,6 @@ export function LanguagePicker({ id, onChange }) {
   const [open, setOpen] = React.useState(false);
   const [state, dispatch] = React.useReducer(reducer, initialState);
   const theme = useTheme();
-  console.log(state);
 
   const handleSelect = (value) => {
     dispatch({ type: "select", langName: value });

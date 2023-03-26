@@ -1,19 +1,19 @@
 "use client";
 
-import { setSelection, useResult, useTheme } from "./store";
+import { EditIcon, PencilIcon } from "lucide-react";
+import React from "react";
+import { EditableCode } from "./code";
+import { setCode, setSelection, useResult, useTheme } from "./store";
 import { getColor } from "./theme-colors";
 
 export function Preview() {
   const result = useResult();
 
-  const { lines, waitingFor, colors } = result;
+  const [editing, setEditing] = React.useState(true);
 
   const theme = useTheme();
 
-  if (!lines) return null;
-  const lineCount = lines.length;
-  const lineDigits = lineCount.toString().length;
-  const lineNumberColor = getColor(theme, "editorLineNumber.foreground");
+  if (!result || !theme) return null;
 
   return (
     <div className="rounded overflow-hidden">
@@ -55,62 +55,26 @@ export function Preview() {
           }}
           className="hover:outline-dotted cursor-pointer"
         ></div>
+        <button
+          onClick={() => setEditing((x) => !x)}
+          className="ml-auto mr-2"
+          style={{ display: editing ? "none" : "block" }}
+        >
+          <PencilIcon
+            style={{
+              color: getColor(theme, "icon.foreground"),
+            }}
+            className="opacity-70 hover:opacity-100 w-5 h-5 "
+          />
+        </button>
       </div>
-      <pre
-        id="code-preview"
-        className="p-2 cursor-pointer"
-        style={{
-          background: colors.background,
-          minWidth: "40ch",
-          maxWidth: "80ch",
-          overflow: "auto",
-          maxHeight: "80vh",
+      <EditableCode
+        editing={editing}
+        onDone={(newCode) => {
+          setCode(newCode);
+          setEditing(false);
         }}
-        onClick={() =>
-          setSelection({ type: "color", key: "editor.background" })
-        }
-      >
-        <code>
-          {lines.map((l, i) => (
-            <div key={i}>
-              <span
-                className="hover:outline-dotted cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelection({
-                    type: "color",
-                    key: "editorLineNumber.foreground",
-                  });
-                }}
-                style={{
-                  width: lineDigits + "ch",
-                  marginRight: "1.5ch",
-                  display: "inline-block",
-                  textAlign: "right",
-                  color: lineNumberColor,
-                  userSelect: "none",
-                }}
-              >
-                {i + 1}
-              </span>
-              {l.map((t, j) => (
-                <span
-                  className="hover:outline-dotted cursor-pointer"
-                  key={j}
-                  style={t.style}
-                  children={t.content}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelection({ ...t, type: "token" });
-                  }}
-                />
-              ))}
-              <br />
-            </div>
-          ))}
-        </code>
-      </pre>
-      {/* {waitingFor && <div className="absolute">Waiting for {waitingFor}</div>} */}
+      />
     </div>
   );
 }

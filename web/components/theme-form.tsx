@@ -1,16 +1,7 @@
 "use client";
 
-import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  setCode,
-  setLang,
-  setTheme,
-  useCode,
-  useLang,
-  useTheme,
-} from "./store";
+import { setTheme, useCode, useLang, useTheme } from "./store";
 import { ExportDialog } from "./export-dialog";
 
 import { BaseThemePicker } from "./theme-form.base";
@@ -25,19 +16,6 @@ export function ThemeForm() {
       <BaseThemePicker onBaseChange={(theme) => setTheme(fixTheme(theme))} />
       <Separator className="mb-4" />
 
-      <div className="mb-4">
-        <Label htmlFor="preview-code" className="mb-2 block">
-          Preview Code
-        </Label>
-        <Textarea
-          id="preview-code"
-          className="mono"
-          rows={7}
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-        />
-      </div>
-      <Separator className="mb-4" />
       <ExportDialog />
     </div>
   );
