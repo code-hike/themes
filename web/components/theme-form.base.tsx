@@ -15,6 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { BuiltInThemePicker } from "./theme-form.builtin";
 import { MarketplacePicker } from "./theme-form.vscode";
+import { SponsorsDialog } from "./sponsors-dialog";
 
 function SponsorMessage() {
   return (
@@ -41,32 +42,7 @@ function SponsorsPopover() {
           <span className="sr-only">Open popover</span>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-80">
-        <div className="grid gap-4">
-          <div className="space-y-2">
-            <p>
-              Become a{" "}
-              <a
-                href="https://github.com/sponsors/code-hike/"
-                className="underline"
-              >
-                Code Hike sponsor
-              </a>{" "}
-              for $19 a month to load more themes:
-            </p>
-            <ul className="list-disc list-inside">
-              <li>22 built-in themes</li>
-              <li>Any theme from VS Code</li>
-              <li>Your custom theme</li>
-            </ul>
-            <Button variant="outline">Sponsor Code Hike</Button>
-            <p>
-              If you are a sponsor:
-              <Button variant="outline">Log in with GitHub</Button>
-            </p>
-          </div>
-        </div>
-      </PopoverContent>
+      <PopoverContent className="w-80"></PopoverContent>
     </Popover>
   );
 }
@@ -74,12 +50,14 @@ function SponsorsPopover() {
 export function BaseThemePicker({ onBaseChange }) {
   const [selectedTab, setSelectedTab] = useState("builtin");
   return (
-    <div className="mb-4">
-      <Label htmlFor="theme-base" className="mb-2 block">
+    <div className="mb-4 px-2">
+      <Label
+        htmlFor="theme-base"
+        className="mb-2 flex justify-between items-center"
+      >
         Base Theme{" "}
         <span className="text-slate-400">
-          (Sponsors only
-          <SponsorsPopover />)
+          <SponsorsDialog />
         </span>
       </Label>
       <Tabs value={selectedTab} onValueChange={setSelectedTab}>

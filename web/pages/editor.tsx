@@ -69,11 +69,11 @@ export default function Page({ sponsor }) {
   );
 }
 
-const columnClasses = "bg-slate-900 h-full px-2 py-4";
+const columnClasses = "";
 
 function RightColumn() {
   return (
-    <div className={cn(columnClasses, "w-80 right-0")}>
+    <div className={" bg-slate-900 h-full py-4 w-80 right-0"}>
       <Editor />
     </div>
   );

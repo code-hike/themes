@@ -3,7 +3,6 @@ import React from "react";
 import { getColor } from "@/components/theme-colors";
 import { setSelection, useCode, useLang, useResult, useTheme } from "./store";
 import { CheckIcon, X } from "lucide-react";
-import { Button } from "./ui/button";
 
 export function EditableCode({ editing, onDone }) {
   const result = useResult();
@@ -15,7 +14,7 @@ export function EditableCode({ editing, onDone }) {
   return editing ? (
     <CodeArea code={code} lang={lang} theme={theme} onDone={onDone} />
   ) : (
-    <CodePreview lines={lines} theme={theme} />
+    <CodePreview code={code} lines={lines} theme={theme} />
   );
 }
 
@@ -37,7 +36,6 @@ const commonStyle: any = {
   left: 0,
   // overflow: "auto",
   width: "100%",
-  tabSize: 2,
 };
 
 export function CodeArea({ code, lang, theme, onDone }) {
@@ -180,9 +178,10 @@ function Lines({ code, lang, theme }) {
   );
 }
 
-function CodePreview({ lines, theme }) {
-  if (!lines) return null;
-  const lineCount = lines.length;
+function CodePreview({ lines, theme, code }) {
+  const currentLines =
+    lines || code.split("\n").map((l) => [{ content: l, style: {} }]);
+  const lineCount = currentLines.length;
   const lineDigits = lineCount.toString().length;
   const lineNumberColor = getColor(theme, "editorLineNumber.foreground");
   return (
@@ -203,7 +202,7 @@ function CodePreview({ lines, theme }) {
         }
       >
         <code>
-          {lines.map((l, i) => (
+          {currentLines.map((l, i) => (
             <div key={i}>
               <span
                 className="hover:outline-dotted cursor-pointer"
