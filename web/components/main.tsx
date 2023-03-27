@@ -18,6 +18,23 @@ export function Main() {
         }}
       />
       <Preview />
+      <footer className="text-sm text-slate-300 absolute bottom-12">
+        By{" "}
+        <a
+          href="https://codehike.org/"
+          className="text-slate-100 hover:text-white"
+        >
+          Code Hike
+        </a>
+        . Go to the{" "}
+        <a
+          href="https://github.com/code-hike/themes"
+          className="text-slate-100 hover:text-white"
+        >
+          GitHub repo
+        </a>{" "}
+        for issues or feedback.
+      </footer>
     </main>
   );
 }
