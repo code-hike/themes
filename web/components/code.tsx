@@ -40,6 +40,7 @@ const commonStyle: any = {
 
 export function CodeArea({ code, lang, theme, onDone }) {
   const [input, setInput] = React.useState(code);
+  const ref = React.useRef<HTMLTextAreaElement>(null);
 
   React.useLayoutEffect(() => {
     setInput(code);
@@ -47,6 +48,12 @@ export function CodeArea({ code, lang, theme, onDone }) {
 
   const lineCount = input.split("\n").length;
   const lineDigits = lineCount.toString().length;
+
+  React.useEffect(() => {
+    if (ref.current) {
+      ref.current.focus();
+    }
+  }, []);
 
   return (
     <>
@@ -90,6 +97,7 @@ export function CodeArea({ code, lang, theme, onDone }) {
           />
         </button>
         <textarea
+          ref={ref}
           data-gramm_editor="false"
           {...textAreaProps}
           onInput={(e) => {

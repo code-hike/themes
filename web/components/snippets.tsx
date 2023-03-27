@@ -394,11 +394,36 @@ No \\n's!",
   lua: ``,
   make: ``,
   makefile: ``,
-  markdown: ``,
-  md: ``,
+  markdown: `# Heading 1
+
+[Link text](https://example.com) lorem *italic text*
+
+## Heading 2
+
+- Unordered list item 1
+- Unordered list item 2
+`,
+  md: `# Heading 1
+
+[Link text](https://example.com) lorem *italic text*
+
+## Heading 2
+
+- Unordered list item 1
+- Unordered list item 2
+`,
   marko: ``,
   matlab: ``,
-  mdx: ``,
+  mdx: `import {Chart} from './snowfall.js'
+export const year = 2018
+
+# Last year’s snowfall
+
+In {year}, the snowfall was above average.
+It was followed by a warm spring which caused
+flood conditions in many of the nearby rivers.
+
+<Chart year={year} color="#fcb32c" />`,
   mermaid: ``,
   nginx: ``,
   nim: ``,
