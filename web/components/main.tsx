@@ -10,15 +10,7 @@ export function Main() {
       style={{ tabSize: 2 }}
       className="flex items-center h-full w-full justify-center mono flex-1 flex-col gap-4"
     >
-      <LanguagePicker
-        id="preview-lang"
-        onChange={(e) => {
-          setLang(e);
-          setCode(snippets[e] || "lorem ipsum");
-        }}
-      />
-      <Preview />
-      <footer className="text-sm text-slate-300 absolute bottom-12 -z-10">
+      <footer className="text-sm text-slate-300 absolute bottom-12">
         By{" "}
         <a
           href="https://codehike.org/"
@@ -35,6 +27,14 @@ export function Main() {
         </a>{" "}
         for issues or feedback.
       </footer>
+      <LanguagePicker
+        id="preview-lang"
+        onChange={(e) => {
+          setLang(e);
+          setCode(snippets[e] || "lorem ipsum");
+        }}
+      />
+      <Preview />
     </main>
   );
 }

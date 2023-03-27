@@ -16,7 +16,7 @@ export function Preview() {
   if (!result || !theme) return null;
 
   return (
-    <div className="rounded overflow-hidden">
+    <div className="rounded overflow-hidden z-10">
       <style
         dangerouslySetInnerHTML={{
           __html: `#code-preview ::selection { background-color: ${getColor(
