@@ -41,7 +41,7 @@ import { ExportDialog } from "./export-dialog";
 import { BaseThemePicker } from "./theme-form.base";
 import { fixTheme } from "./theme-utils";
 
-export function Editor() {
+export function Editor({ sponsor }) {
   const selection = useSelection() || {
     type: "color",
     key: "editor.background",
@@ -51,7 +51,10 @@ export function Editor() {
 
   return (
     <div>
-      <BaseThemePicker onBaseChange={(theme) => setTheme(fixTheme(theme))} />
+      <BaseThemePicker
+        onBaseChange={(theme) => setTheme(fixTheme(theme))}
+        sponsor={sponsor}
+      />
 
       <Separator className="mb-4 mt-4" />
       {!theme ? null : selection.type === "token" ? (

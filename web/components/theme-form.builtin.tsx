@@ -33,7 +33,7 @@ const spinner = (
   </svg>
 );
 
-export function BuiltInThemePicker({ onBaseChange }) {
+export function BuiltInThemePicker({ onBaseChange, isSponsor }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   function fetchTheme(name: string) {
@@ -52,8 +52,10 @@ export function BuiltInThemePicker({ onBaseChange }) {
   return (
     <>
       <Select
+        disabled={!isSponsor}
         value={state.selected}
         onValueChange={(e) => {
+          if (!isSponsor) return;
           dispatch({ type: "select", themeName: e });
           if (state.themes[e].theme != null) {
             onBaseChange(state.themes[e].theme);

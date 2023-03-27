@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 
-import { Textarea } from "@/components/ui/textarea";
 import {
   Dialog,
   DialogContent,
@@ -10,17 +9,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useTheme } from "./store";
-import { useMemo, useState } from "react";
 import { Info } from "lucide-react";
-import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 export function SponsorsDialog() {
-  const theme = useTheme();
-  const [format, setFormat] = useState<string>("js");
-  const output = useOutput(theme, format);
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -50,41 +42,16 @@ export function SponsorsDialog() {
               >
                 Sponsor Code Hike
               </a>
-              <Button variant="outline">Log in with GitHub</Button>
+              <Button
+                variant="outline"
+                onClick={() => signIn("github", { redirect: false })}
+              >
+                Log in with GitHub
+              </Button>
             </DialogFooter>
           </div>
         </div>
       </DialogContent>
     </Dialog>
   );
-}
-
-function useOutput(theme: any, format: string) {
-  return useMemo(() => {
-    const themeString = JSON.stringify(theme, null, 2);
-    switch (format) {
-      case "js":
-        return `const myTheme = ${themeString};`;
-      case "json":
-        return themeString;
-      case "esm":
-        return `export default ${themeString};`;
-      case "cjs":
-        return `module.exports = ${themeString};`;
-    }
-  }, [format, theme]);
-}
-
-function copyToClipboard(text: string) {
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(text);
-  } else {
-    const textArea = document.createElement("textarea");
-    textArea.value = text;
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textArea);
-  }
 }

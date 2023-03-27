@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 
 import { unzip } from "unzipit";
 
-export function MarketplacePicker({ onBaseChange }) {
+export function MarketplacePicker({ onBaseChange, isSponsor }) {
   const [url, setUrl] = useState("");
   const [themes, setThemes] = useState([]);
   const [selectedTheme, setSelectedTheme] = useState(themes[0]);
@@ -40,8 +40,9 @@ export function MarketplacePicker({ onBaseChange }) {
         id="marketplace-url"
         className="mb-4"
         value={url}
-        disabled
+        disabled={!isSponsor}
         onChange={(e) => {
+          if (!isSponsor) return;
           onUrlChange(e.target.value);
         }}
         placeholder="https://marketplace.visualstudio.com/items?itemName=sdras.night-owl"

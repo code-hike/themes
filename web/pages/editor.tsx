@@ -1,12 +1,8 @@
-import { ThemeForm } from "@/components/theme-form";
-import { cn } from "@/lib/utils";
 import { Editor } from "@/components/editor";
 import Head from "next/head";
 import { Inter as FontSans } from "@next/font/google";
-import { useSession, signIn, signOut } from "next-auth/react";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "pages/api/auth/[...nextauth]";
 import { Main } from "@/components/main";
+import { getSponsor } from "@/lib/get-sponsor";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -14,40 +10,7 @@ const fontSans = FontSans({
   display: "swap",
 });
 
-export async function getServerSideProps(context) {
-  const session = await getServerSession(context.req, context.res, authOptions);
-  if (!session) {
-    return {
-      props: { sponsor: "unknown" },
-    };
-  }
-
-  const sponsorsResponse = await fetch(
-    "https://raw.githubusercontent.com/pomber/code-hike-site/main/data/sponsors.json"
-  );
-  const sponsorsData = await sponsorsResponse.json();
-
-  const { user, orgs } = session;
-  const login = user.name;
-  const allAccess = [...sponsorsData.sponsors, ...sponsorsData.access];
-
-  let isSponsor = false;
-  if (allAccess.some((s) => s.login === login)) {
-    isSponsor = true;
-  }
-
-  // org has access
-  const userOrgs = orgs || [];
-  if (allAccess.some((s) => s.isOrg && userOrgs.includes(s.login))) {
-    isSponsor = true;
-  }
-
-  return {
-    props: {
-      sponsor: isSponsor ? "sponsor" : "not-sponsor",
-    },
-  };
-}
+export const getServerSideProps = getSponsor;
 
 export default function Page({ sponsor }) {
   return (
@@ -64,17 +27,15 @@ export default function Page({ sponsor }) {
       </Head>
 
       <Main />
-      <RightColumn />
+      <RightColumn sponsor={sponsor} />
     </div>
   );
 }
 
-const columnClasses = "";
-
-function RightColumn() {
+function RightColumn({ sponsor }) {
   return (
     <div className={" bg-slate-900 h-full py-4 w-80 right-0"}>
-      <Editor />
+      <Editor sponsor={sponsor} />
     </div>
   );
 }
