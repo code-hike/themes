@@ -18,7 +18,7 @@ export function Main() {
         }}
       />
       <Preview />
-      <footer className="text-sm text-slate-300 absolute bottom-12">
+      <footer className="text-sm text-slate-300 absolute bottom-12 -z-10">
         By{" "}
         <a
           href="https://codehike.org/"
