@@ -21,10 +21,10 @@
   resolved "https://registry.yarnpkg.com/@code-hike/lighter/-/lighter-0.4.1.tgz#65ea4f3011444302b5438e1f99614c57139b680f"
   integrity sha512-6sYXpIHsklu98o+G8V7TyaxNJrD/2NaHjTIKKqjSRJ/jSY/xo4UNLMEFtMmVAroRmwpLsQVrdChPIsBaNabT8w==
 
-"@code-hike/lighter@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@code-hike/lighter/-/lighter-0.5.1.tgz#86975f44d970f487d5a00a754f9564812ad34f5e"
-  integrity sha512-SECX9tY28M+a9bF1JVi8r6gAs7nUlZfpi9tYwd/DJKnJMEmsjMbzNWs8C8GVkI+9gZAGdtdX3H4VEj9KYwdUJg==
+"@code-hike/lighter@0.6.4":
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/@code-hike/lighter/-/lighter-0.6.4.tgz#f3172f58ca65deab3e89782310e4bb5849aed70f"
+  integrity sha512-RGH/15WnFecNSPUxMVmbql0py25ijrhQlMtqkOSIgVZtmHxh00DkqImx65uL3dADFIzOa0RkN3ObUJWAppOgJQ==
 
 "@floating-ui/core@^0.7.3":
   version "0.7.3"
