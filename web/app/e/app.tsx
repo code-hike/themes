@@ -20,9 +20,7 @@ export default function App({
     (state) => state.langOptions.find((l) => l.name === state.selectedLangName)!
   );
   const pickLang = useSelector((state) => state.pickLang);
-
   const setTheme = useSelector((state) => state.setTheme);
-
   const rawTheme = useSelector((state) => state.rawTheme);
 
   useEffect(() => {
@@ -30,23 +28,53 @@ export default function App({
   }, []);
 
   return (
-    <main className="p-12">
-      <LanguagePicker
-        langs={langs}
-        selected={selected}
-        onSelected={(option) => pickLang(option.name)}
-      />
-      <BaseThemePicker
-        onBaseChange={setTheme}
-        sponsor="sponsor"
-        initialState={{
-          themes: initialState.builtInThemes,
-          themeName: initialState.selectedThemeName,
-          theme: rawTheme,
-        }}
-      />
-      <CodeCanvas />
-    </main>
+    <div className="flex h-full fixed w-full">
+      <main
+        style={{ tabSize: 2 }}
+        className="flex items-center h-full w-full justify-center mono flex-1 flex-col gap-4"
+      >
+        <Footer />
+        <LanguagePicker
+          langs={langs}
+          selected={selected}
+          onSelected={(option) => pickLang(option.name)}
+        />
+        <CodeCanvas />
+      </main>
+      <div className="bg-slate-900 h-full py-4 w-80 right-0">
+        <BaseThemePicker
+          onBaseChange={setTheme}
+          sponsor="sponsor"
+          initialState={{
+            themes: initialState.builtInThemes,
+            themeName: initialState.selectedThemeName,
+            theme: rawTheme,
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="text-sm text-slate-300 absolute bottom-12">
+      By{" "}
+      <a
+        href="https://codehike.org/"
+        className="text-slate-100 hover:text-white"
+      >
+        Code Hike
+      </a>
+      . Go to the{" "}
+      <a
+        href="https://github.com/code-hike/themes"
+        className="text-slate-100 hover:text-white"
+      >
+        GitHub repo
+      </a>{" "}
+      for issues or feedback.
+    </footer>
   );
 }
 
