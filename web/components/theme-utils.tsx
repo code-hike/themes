@@ -14,22 +14,24 @@ export function getPalette(theme) {
 }
 
 export function fixTheme(theme) {
-  // add global setting if missing
-
-  if (!theme.tokenColors.find((rule) => !rule.scope)) {
-    theme.tokenColors.push({
-      name: "Global",
-      scope: "",
-      settings: {
-        foreground: theme.foreground,
-        background: theme.background,
+  const fixedTheme = { ...theme };
+  if (!fixedTheme.tokenColors.find((rule) => !rule.scope)) {
+    fixedTheme.themeColors = [
+      {
+        name: "Global",
+        scope: "",
+        settings: {
+          foreground: theme.foreground,
+          background: theme.background,
+        },
       },
-    });
+      ...(theme.themeColors || []),
+    ];
   }
 
-  theme.type = getColorScheme(theme);
+  fixedTheme.type = getColorScheme(fixedTheme);
 
-  return theme;
+  return fixedTheme;
 }
 
 function getColorScheme(theme) {
