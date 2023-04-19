@@ -2,7 +2,7 @@ import { highlight } from "@/components/highlighter";
 import React from "react";
 import { getColor } from "@/components/theme-colors";
 import { setSelection, useCode, useLang, useResult, useTheme } from "./store";
-import { CheckIcon, X } from "lucide-react";
+import { CheckIcon } from "lucide-react";
 
 export function EditableCode({ editing, onDone }) {
   const result = useResult();

@@ -1,4 +1,5 @@
 import { getColor } from "@/components/theme-colors";
+import { highlightSync } from "@code-hike/lighter";
 import { CheckIcon } from "lucide-react";
 import React from "react";
 
@@ -123,15 +124,10 @@ export function CodeEditor({ code, lang, theme, onDone }) {
 }
 
 function Lines({ code, lang, theme }) {
-  const [lines, setLines] = React.useState(() =>
-    code.split("\n").map((l) => [{ content: l, style: {} }])
-  );
-  React.useEffect(() => {
-    // highlight(code, lang, theme).promise.then(({ lines }) => {
-    //   setLines(lines);
-    // });
-    console.log("rehighlight");
+  const lines = React.useMemo(() => {
+    return highlightSync(code, lang, theme).lines;
   }, [code, lang, theme]);
+
   const lineCount = lines.length;
   const lineDigits = lineCount.toString().length;
   const lineNumberColor = getColor(theme, "editorLineNumber.foreground");

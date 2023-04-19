@@ -56,6 +56,8 @@ function CodeCanvas() {
   const editing = useSelector((state) => state.editing);
   const setEditing = useSelector((state) => state.setEditing);
   const lang = useSelector((state) => state.selectedLangName);
+  const code = useSelector((state) => state.codes[state.selectedLangName]);
+  const updateCode = useSelector((state) => state.updateCode);
   const setSelection = (e) => console.log(e);
   return (
     <div className="rounded overflow-hidden z-10">
@@ -75,12 +77,11 @@ function CodeCanvas() {
       />
       {editing ? (
         <CodeEditor
-          code="hey"
+          code={code}
           lang={lang}
           theme={theme}
           onDone={(code) => {
-            setEditing(false);
-            console.log(code);
+            updateCode(code);
           }}
         />
       ) : (

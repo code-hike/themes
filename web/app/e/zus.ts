@@ -14,6 +14,7 @@ export type State = {
   result: LighterResult;
   rawTheme: RawTheme;
   editing: boolean;
+  codes: { [key: string]: string };
 };
 
 export type Actions = {
@@ -21,6 +22,7 @@ export type Actions = {
   pickLang: (langName: string) => void;
   loadLang: (langName: string) => Promise<void>;
   updateResult: () => void;
+  updateCode: (code: string) => void;
   setTheme: (theme: RawTheme) => void;
   setEditing: (editing: boolean) => void;
 };
@@ -31,6 +33,10 @@ export function createMyStore(initialState: State) {
     // initial state
     ...initialState,
     editing: false,
+    codes: initialState.langOptions.reduce((acc, { name }) => {
+      acc[name] = `const foo = "bar";\nconsole.log(foo);`;
+      return acc;
+    }, {} as { [key: string]: string }),
 
     // setters
     setEditing: (editing: boolean) => {
@@ -76,13 +82,17 @@ export function createMyStore(initialState: State) {
       get().setLangStatus(langName, "loaded");
       get().updateResult();
     },
+    updateCode: (code: string) => {
+      set((state) => {
+        state.codes[state.selectedLangName] = code;
+        state.editing = false;
+      });
+      get().updateResult();
+    },
     updateResult: () => {
-      const { selectedLangName, rawTheme } = get();
-      const result = highlightSync(
-        `const foo = "bar";\nconsole.log(foo);`,
-        selectedLangName,
-        { ...rawTheme }
-      );
+      const { selectedLangName, rawTheme, codes } = get();
+      const code = codes[selectedLangName];
+      const result = highlightSync(code, selectedLangName, rawTheme);
       set((state) => {
         state.result = result;
       });
