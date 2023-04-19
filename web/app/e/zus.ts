@@ -28,15 +28,8 @@ export type Actions = {
 };
 
 export function createMyStore(initialState: State) {
-  console.log("creating store");
   const creator = immer<State & Actions>((set, get) => ({
-    // initial state
     ...initialState,
-    editing: false,
-    codes: initialState.langOptions.reduce((acc, { name }) => {
-      acc[name] = `const foo = "bar";\nconsole.log(foo);`;
-      return acc;
-    }, {} as { [key: string]: string }),
 
     // setters
     setEditing: (editing: boolean) => {

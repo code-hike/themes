@@ -3,6 +3,7 @@ import { getLangOptions } from "./languages";
 import { StoreProvider } from "./store-provider";
 import darkPlus from "../../themes/dark-plus.json";
 import { highlight } from "@code-hike/lighter";
+import codes from "./codes";
 
 export default async function Page() {
   const initialLang = "javascript";
@@ -15,15 +16,19 @@ export default async function Page() {
     <StoreProvider
       initialState={{
         selectedLangName: initialLang,
-        langOptions: getLangOptions(),
+        langOptions,
         result: result,
         rawTheme: initialTheme,
+        codes,
+        editing: false,
       }}
     >
       <App initialState={{ selectedThemeName: "dark-plus", builtInThemes }} />
     </StoreProvider>
   );
 }
+
+const langOptions = getLangOptions();
 
 const builtInThemes = [
   "dark-plus",

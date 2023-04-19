@@ -9,7 +9,9 @@ type Store = ReturnType<typeof createMyStore>;
 
 const StoreContext = createContext<Store | null>(null);
 
-type StoreProviderProps = React.PropsWithChildren<{ initialState: State }>;
+type StoreProviderProps = React.PropsWithChildren<{
+  initialState: State;
+}>;
 
 export function StoreProvider({ children, initialState }: StoreProviderProps) {
   const storeRef = useRef<Store>();

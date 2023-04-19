@@ -10,8 +10,6 @@ export function CodePreview({ lines, theme, setSelection }) {
       id="code-preview"
       style={{
         background: getColor(theme, "editor.background"),
-        minWidth: "40ch",
-        maxWidth: "80ch",
         overflow: "auto",
         maxHeight: "80vh",
       }}

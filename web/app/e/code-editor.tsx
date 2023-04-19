@@ -51,8 +51,6 @@ export function CodeEditor({ code, lang, theme, onDone }) {
         style={{
           position: "relative",
           background: getColor(theme, "editor.background"),
-          minWidth: "40ch",
-          maxWidth: "80ch",
           // overflow: "auto",
           maxHeight: "80vh",
         }}

@@ -60,7 +60,13 @@ function CodeCanvas() {
   const updateCode = useSelector((state) => state.updateCode);
   const setSelection = (e) => console.log(e);
   return (
-    <div className="rounded overflow-hidden z-10">
+    <div
+      className="rounded overflow-hidden z-10 "
+      style={{
+        minWidth: "40ch",
+        maxWidth: "80ch",
+      }}
+    >
       <style
         dangerouslySetInnerHTML={{
           __html: `#code-preview ::selection { background-color: ${getColor(
