@@ -15,7 +15,7 @@ export function getPalette(theme) {
 
 export function fixTheme(theme) {
   const fixedTheme = { ...theme };
-  if (!fixedTheme.tokenColors.find((rule) => !rule.scope)) {
+  if (!fixedTheme.tokenColors?.find((rule) => !rule.scope)) {
     fixedTheme.themeColors = [
       {
         name: "Global",

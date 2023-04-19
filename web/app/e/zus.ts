@@ -11,8 +11,9 @@ import {
 export type State = {
   langOptions: LangOption[];
   selectedLangName: string;
-  result?: LighterResult;
+  result: LighterResult;
   rawTheme: RawTheme;
+  editing: boolean;
 };
 
 export type Actions = {
@@ -21,6 +22,7 @@ export type Actions = {
   loadLang: (langName: string) => Promise<void>;
   updateResult: () => void;
   setTheme: (theme: RawTheme) => void;
+  setEditing: (editing: boolean) => void;
 };
 
 export function createMyStore(initialState: State) {
@@ -28,8 +30,14 @@ export function createMyStore(initialState: State) {
   const creator = immer<State & Actions>((set, get) => ({
     // initial state
     ...initialState,
+    editing: false,
 
     // setters
+    setEditing: (editing: boolean) => {
+      set((state) => {
+        state.editing = editing;
+      });
+    },
     setLangStatus: (langName: string, status: LangOption["status"]) => {
       set((state) => {
         const langOption = state.langOptions.find(
