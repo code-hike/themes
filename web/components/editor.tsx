@@ -188,7 +188,12 @@ function TokenEditor({ token, result }) {
         className="mb-4 text-center relative flex h-10 w-full items-center justify-center rounded-md border border-slate-300 py-2 px-3 dark:border-slate-700"
         style={{ background: colors.background }}
       >
-        <span style={{ color, fontStyle }}>{token.content}</span>
+        <span
+          style={{ color, fontStyle }}
+          className="truncate overflow-ellipsis"
+        >
+          {token.content}
+        </span>
       </pre>
       {/* <Label className="mb-2 block">Edit Rule</Label> */}
       <div className="mb-4">

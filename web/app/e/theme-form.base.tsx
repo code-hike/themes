@@ -16,37 +16,7 @@ import { BuiltInThemePicker } from "./theme-form.builtin";
 import { MarketplacePicker } from "./theme-form.vscode";
 import { SponsorsDialog } from "./sponsors-dialog";
 
-function SponsorMessage() {
-  return (
-    <div className="px-1 pb-4text-sm">
-      <p>
-        Become a Code Hike sponsor for $19 a month to load more themes:
-        <ul>
-          <li>22 built-in themes</li>
-          <li>Any theme from VS Code marketplace</li>
-          <li>Your custom theme</li>
-        </ul>
-      </p>
-      <p>If you are a sponsor: Log in with GitHub</p>
-    </div>
-  );
-}
-
-function SponsorsPopover() {
-  return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button variant="ghost" className="p-0 h-6 inline-block">
-          <Info className="h-4 inline-block text-slate-400" />
-          <span className="sr-only">Open popover</span>
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-80"></PopoverContent>
-    </Popover>
-  );
-}
-
-export function BaseThemePicker({ onBaseChange, sponsor }) {
+export function BaseThemePicker({ onBaseChange, sponsor, initialState }) {
   const [selectedTab, setSelectedTab] = useState("builtin");
   const isSponsor = sponsor === "sponsor";
   return (
@@ -69,7 +39,10 @@ export function BaseThemePicker({ onBaseChange, sponsor }) {
       </Tabs>
 
       <div className={selectedTab != "builtin" ? "hidden" : ""}>
-        <BuiltInThemePicker onBaseChange={onBaseChange} isSponsor={isSponsor} />
+        <BuiltInThemePicker
+          onThemeChange={onBaseChange}
+          initialState={{ isSponsor, ...initialState }}
+        />
       </div>
       <div className={selectedTab !== "vscode" ? "hidden" : ""}>
         <MarketplacePicker onBaseChange={onBaseChange} isSponsor={isSponsor} />

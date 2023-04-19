@@ -8,6 +8,7 @@ const nextConfig = {
         options: { subsets: ["latin"] },
       },
     ],
+    appDir: true,
   },
 };
 

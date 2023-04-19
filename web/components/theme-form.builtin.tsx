@@ -38,7 +38,7 @@ export function BuiltInThemePicker({ onBaseChange, isSponsor }) {
 
   function fetchTheme(name: string) {
     dispatch({ type: "loading", themeName: name });
-    fetch(`https://lighter.codehike.org/api/theme?name=${name}&v=0.5.1`)
+    fetch(`https://lighter.codehike.org/themes/${name}.json`)
       .then((res) => res.json())
       .then((theme) => {
         dispatch({ type: "loaded", themeName: name, theme });
@@ -46,7 +46,9 @@ export function BuiltInThemePicker({ onBaseChange, isSponsor }) {
   }
 
   useEffect(() => {
-    onBaseChange(state.theme);
+    if (state.theme) {
+      onBaseChange(state.theme);
+    }
   }, [state.theme]);
 
   return (
@@ -144,6 +146,7 @@ const initialState = {
     "dracula-soft": {},
     dracula: {},
     "github-dark": {},
+
     "github-dark-dimmed": {},
     "github-light": {},
     "light-plus": {},

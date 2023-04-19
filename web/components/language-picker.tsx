@@ -1,50 +1,12 @@
 "use client";
 
 import * as React from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { highlight } from "./highlighter";
 import { useTheme } from "./store";
+import { LanguagePickerUI } from "./language-picker.ui";
 
-const spinner = (
-  <svg
-    className="animate-spin  h-4 w-4 mr-2 text-white"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-  >
-    <circle
-      className="opacity-25"
-      cx="12"
-      cy="12"
-      r="10"
-      stroke="currentColor"
-      strokeWidth="4"
-    ></circle>
-    <path
-      className="opacity-75"
-      fill="currentColor"
-      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-    ></path>
-  </svg>
-);
-
-export function LanguagePicker({ id, onChange }) {
-  const [open, setOpen] = React.useState(false);
+export function LanguagePicker({ onChange }) {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   const theme = useTheme();
 
@@ -72,57 +34,34 @@ export function LanguagePicker({ id, onChange }) {
   }));
   const current = languages.find((lang) => lang.alias === value);
 
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          id={id}
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className=" justify-between  w-64"
-        >
-          {current.loading ? spinner : <Check className={cn("mr-2 h-4 w-4")} />}
-          {value}
-          <span className="flex-1" />
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[220px] p-0">
-        <Command>
-          <CommandInput placeholder="Search..." />
-          <CommandEmpty>No language found.</CommandEmpty>
-          <CommandGroup>
-            {languages.map(({ alias, loaded, loading }) => (
-              <CommandItem
-                key={alias}
-                onSelect={(currentValue) => {
-                  if (currentValue !== value) {
-                    handleSelect(currentValue);
-                  }
-                  setOpen(false);
-                }}
-              >
-                {loading ? (
-                  spinner
-                ) : (
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      value === alias ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                )}
+  const all = languages.map((lang) => ({
+    name: lang.alias as string,
+    state: lang.loading
+      ? ("loading" as const)
+      : lang.loaded
+      ? ("loaded" as const)
+      : undefined,
+  }));
 
-                <span className={loaded ? "text-white" : "text-gray-400"}>
-                  {alias}
-                </span>
-              </CommandItem>
-            ))}
-          </CommandGroup>
-        </Command>
-      </PopoverContent>
-    </Popover>
+  const selected = {
+    name: current.alias as string,
+    state: current.loading
+      ? ("loading" as const)
+      : current.loaded
+      ? ("loaded" as const)
+      : undefined,
+  };
+
+  return (
+    <LanguagePickerUI
+      langs={all}
+      popular={[]}
+      used={[]}
+      selected={selected}
+      onSelected={(item) => {
+        handleSelect(item.name);
+      }}
+    />
   );
 }
 

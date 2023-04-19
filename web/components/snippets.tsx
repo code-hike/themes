@@ -329,7 +329,8 @@ a:focus {
   imba: ``,
   ini: ``,
   java: ``,
-  javascript: `function lorem(ipsum, dolor = 1) {
+  javascript: `// to edit the code click the pencil icon ☝️
+function lorem(ipsum, dolor = 1) {
   const sit = ipsum == null ? 0 : ipsum.sit;
   dolor = sit - amet(dolor);
   return dolor;
@@ -523,3 +524,20 @@ a:focus {
   yml: ``,
   zenscript: ``,
 };
+
+type LangItem = {
+  name: string;
+  status: "empty" | "loading" | "loaded" | "used";
+  code: "";
+};
+
+export function getLangItems() {
+  return Object.keys(snippets).map(
+    (lang) =>
+      ({
+        name: lang,
+        status: "empty",
+        code: snippets[lang],
+      } as LangItem)
+  );
+}

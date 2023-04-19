@@ -26,7 +26,7 @@ const SelectTrigger = React.forwardRef<
     )}
     {...props}
   >
-    <span className="absolute left-3 flex h-3.5 w-3.5 items-center justify-center">
+    <span className="absolute left-3 flex items-center justify-center">
       {icon || <Check className="h-4 w-4" />}
     </span>
     {children}

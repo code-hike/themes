@@ -1,16 +1,8 @@
 import { highlight } from "./highlighter";
+import { snippets } from "./snippets";
 import { store, sub, useStore } from "./storer";
 
-const codeStore = store(`function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : ipsum.sit;
-  dolor = sit - amet(dolor);
-  return dolor;
-}
-
-function consectetur(...adipiscing) {
-  const elit = adipiscing[0];
-  return sed.eiusmod(elit) ? elit : [elit];
-}`);
+const codeStore = store(snippets["javascript"]);
 const langStore = store("js");
 const themeStore = store(null);
 const resultStore = store<any>({});
