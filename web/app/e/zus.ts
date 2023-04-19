@@ -8,6 +8,16 @@ import {
   RawTheme,
 } from "@code-hike/lighter";
 
+export type Selection =
+  | {
+      type: "token";
+      scope: string;
+      content: string;
+      style: any;
+      scopes?: string[];
+    }
+  | { type: "color"; key: string };
+
 export type State = {
   langOptions: LangOption[];
   selectedLangName: string;
@@ -15,6 +25,7 @@ export type State = {
   rawTheme: RawTheme;
   editing: boolean;
   codes: { [key: string]: string };
+  selection?: Selection;
 };
 
 export type Actions = {
@@ -25,6 +36,7 @@ export type Actions = {
   updateCode: (code: string) => void;
   setTheme: (theme: RawTheme) => void;
   setEditing: (editing: boolean) => void;
+  setSelection: (selection: Selection) => void;
 };
 
 export function createMyStore(initialState: State) {
@@ -50,6 +62,11 @@ export function createMyStore(initialState: State) {
         state.rawTheme = theme;
       });
       get().updateResult();
+    },
+    setSelection: (selection: Selection) => {
+      set((state) => {
+        state.selection = selection;
+      });
     },
 
     // actions

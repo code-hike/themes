@@ -9,6 +9,8 @@ import { getColor } from "@/components/theme-colors";
 import { CodeBar } from "./code-bar";
 import { CodePreview } from "./code-preview";
 import { CodeEditor } from "./code-editor";
+import { Separator } from "@/components/ui/separator";
+import { ThemeColorsEditor } from "./theme-colors-editor";
 
 export default function App({
   initialState,
@@ -26,6 +28,11 @@ export default function App({
   useEffect(() => {
     pickLang(selected.name);
   }, []);
+
+  const selection = useSelector(
+    (state) => state.selection || { type: "color", key: "editor.background" }
+  );
+  const setSelection = useSelector((state) => state.setSelection);
 
   return (
     <div className="flex h-full fixed w-full">
@@ -51,6 +58,15 @@ export default function App({
             theme: rawTheme,
           }}
         />
+        <Separator className="mb-4 mt-4" />
+        {selection?.type === "color" && (
+          <ThemeColorsEditor
+            colorKey={selection.key}
+            theme={rawTheme}
+            setTheme={setTheme}
+            setSelection={setSelection}
+          />
+        )}
       </div>
     </div>
   );
@@ -86,7 +102,7 @@ function CodeCanvas() {
   const lang = useSelector((state) => state.selectedLangName);
   const code = useSelector((state) => state.codes[state.selectedLangName]);
   const updateCode = useSelector((state) => state.updateCode);
-  const setSelection = (e) => console.log(e);
+  const setSelection = useSelector((state) => state.setSelection);
   return (
     <div
       className="rounded overflow-hidden z-10 "
