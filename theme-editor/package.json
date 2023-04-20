@@ -16,12 +16,16 @@
   "dependencies": {
     "@code-hike/lighter": "^0.6.5",
     "@radix-ui/react-dialog": "^1.0.3",
+    "@radix-ui/react-label": "^2.0.1",
     "@radix-ui/react-popover": "^1.0.5",
     "@radix-ui/react-scroll-area": "^1.0.3",
+    "@radix-ui/react-select": "^1.2.1",
+    "@radix-ui/react-tabs": "^1.0.3",
     "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
     "cmdk": "^0.2.0",
     "immer": "^10.0.1",
+    "jsonc-parser": "^3.2.0",
     "lucide-react": "0.105.0-alpha.4",
     "next": "^13.3.0",
     "next-themes": "^0.2.1",
@@ -31,6 +35,7 @@
     "sharp": "^0.31.3",
     "tailwind-merge": "^1.12.0",
     "tailwindcss-animate": "^1.0.5",
+    "unzipit": "^1.4.3",
     "zustand": "^4.3.7"
   },
   "devDependencies": {

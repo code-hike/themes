@@ -8,6 +8,7 @@ import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 
 import { Main } from "./main"
+import { SideColumn } from "./side-column"
 import { StoreProvider } from "./store-provider"
 
 const initialLang = "javascript"
@@ -15,17 +16,16 @@ const initialTheme = darkPlus
 
 export default async function Page() {
   const result = await highlight(codes[initialLang], initialLang, initialTheme)
+  const initialState = {
+    selectedLangName: initialLang,
+    langOptions: getLangOptions(),
+    result: result,
+    rawTheme: initialTheme,
+    codes,
+    editing: false,
+  }
   return (
-    <StoreProvider
-      initialState={{
-        selectedLangName: initialLang,
-        langOptions: getLangOptions(),
-        result: result,
-        rawTheme: initialTheme,
-        codes,
-        editing: false,
-      }}
-    >
+    <StoreProvider initialState={initialState}>
       <div className="flex h-full fixed w-full">
         <main
           style={{ tabSize: 2 }}
@@ -35,7 +35,9 @@ export default async function Page() {
           <Footer />
         </main>
 
-        <div className="h-full py-4 w-80 right-0 border-l">hey</div>
+        <div className="h-full py-4 w-80 right-0 border-l">
+          <SideColumn themes={builtInThemes} initialThemeName={"dark-plus"} />
+        </div>
       </div>
     </StoreProvider>
   )
@@ -43,7 +45,7 @@ export default async function Page() {
 
 function Footer() {
   return (
-    <footer className="text-sm text-slate-300 absolute bottom-12">
+    <footer className="text-sm absolute bottom-6">
       <Link
         href="https://github.com/code-hike/themes"
         target="_blank"
@@ -92,3 +94,28 @@ function Footer() {
     </footer>
   )
 }
+
+const builtInThemes = [
+  "dark-plus",
+  "dracula-soft",
+  "dracula",
+  "github-dark",
+  "github-dark-dimmed",
+  "github-light",
+  "light-plus",
+  "material-darker",
+  "material-default",
+  "material-lighter",
+  "material-ocean",
+  "material-palenight",
+  "min-dark",
+  "min-light",
+  "monokai",
+  "nord",
+  "one-dark-pro",
+  "poimandres",
+  "slack-dark",
+  "slack-ochin",
+  "solarized-dark",
+  "solarized-light",
+]

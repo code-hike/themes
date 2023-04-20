@@ -1,17 +1,17 @@
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+import { useState } from "react"
 
-import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Textarea } from "@/components/ui/textarea"
 
-import { BuiltInThemePicker } from "./theme-form.builtin";
-import { MarketplacePicker } from "./theme-form.vscode";
-import { SponsorsDialog } from "./sponsors-dialog";
+import { SponsorsDialog } from "./sponsors-dialog"
+import { BuiltInThemePicker } from "./theme-picker.builtin"
+import { MarketplacePicker } from "./theme-picker.vscode"
 
 export function BaseThemePicker({ onBaseChange, sponsor, initialState }) {
-  const [selectedTab, setSelectedTab] = useState("builtin");
-  const isSponsor = sponsor === "sponsor";
+  const [selectedTab, setSelectedTab] = useState("builtin")
+  const isSponsor = sponsor === "sponsor"
   return (
     <div className="mb-4 px-2">
       <Label
@@ -25,9 +25,15 @@ export function BaseThemePicker({ onBaseChange, sponsor, initialState }) {
       </Label>
       <Tabs value={selectedTab} onValueChange={setSelectedTab}>
         <TabsList className="mb-4 w-full">
-          <TabsTrigger value="builtin">Built In</TabsTrigger>
-          <TabsTrigger value="vscode">VS Code</TabsTrigger>
-          <TabsTrigger value="custom">Custom</TabsTrigger>
+          <TabsTrigger value="builtin" className="flex-1">
+            Built In
+          </TabsTrigger>
+          <TabsTrigger value="vscode" className="flex-1">
+            VS Code
+          </TabsTrigger>
+          <TabsTrigger value="custom" className="flex-1">
+            Custom
+          </TabsTrigger>
         </TabsList>
       </Tabs>
 
@@ -44,11 +50,11 @@ export function BaseThemePicker({ onBaseChange, sponsor, initialState }) {
         <CustomThemePicker onBaseChange={onBaseChange} isSponsor={isSponsor} />
       </div>
     </div>
-  );
+  )
 }
 
 function CustomThemePicker({ onBaseChange, isSponsor }) {
-  const [customTheme, setCustomTheme] = useState("");
+  const [customTheme, setCustomTheme] = useState("")
 
   return (
     <div>
@@ -65,17 +71,17 @@ function CustomThemePicker({ onBaseChange, isSponsor }) {
         className="w-full"
         disabled={!isSponsor}
         onClick={() => {
-          if (!isSponsor) return;
+          if (!isSponsor) return
           try {
-            const theme = JSON.parse(customTheme);
-            onBaseChange(theme);
+            const theme = JSON.parse(customTheme)
+            onBaseChange(theme)
           } catch (e) {
-            console.error(e);
+            console.error(e)
           }
         }}
       >
         Load JSON
       </Button>
     </div>
-  );
+  )
 }
