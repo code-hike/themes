@@ -1,6 +1,7 @@
 "use client"
 
 import { Separator } from "@/components/ui/separator"
+import { ExportDialog } from "@/components/export-dialog"
 import { ThemeColorsEditor } from "@/components/theme-colors-editor"
 import { BaseThemePicker } from "@/components/theme-picker"
 import { ThemeRuleEditor } from "@/components/theme-rule-editor"
@@ -37,6 +38,9 @@ export function SideColumn({ themes, initialThemeName }) {
         key={rawTheme.name}
       />
       <Separator className="mb-4 mt-4" />
+      <div className="px-2">
+        <ExportDialog theme={rawTheme} />
+      </div>
     </>
   )
 }
