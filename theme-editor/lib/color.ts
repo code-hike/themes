@@ -62,3 +62,11 @@ export function transparent(color: Color, opacity: number): Color {
   const { r, g, b, a } = hexToObject(color)!
   return objectToHex({ r, g, b, a: a * opacity })
 }
+
+export function opaque(color: Color): Color {
+  if (!color) {
+    return color
+  }
+  const { r, g, b } = hexToObject(color)!
+  return objectToHex({ r, g, b, a: 1 })
+}

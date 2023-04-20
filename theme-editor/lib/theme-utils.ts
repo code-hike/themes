@@ -1,16 +1,15 @@
+import { opaque } from "./color"
+
 export function getPalette(theme) {
-  console.log("getPalette")
   const tokenColors = theme.tokenColors
     .filter((rule) => rule.settings && rule.settings.foreground)
     .map((rule) => rule.settings.foreground.toUpperCase())
 
-  const themeColors = Object.values(theme?.colors || {})
+  const themeColors = Object.values(theme?.colors || {}).filter(
+    (c) => typeof c === "string"
+  )
 
-  const colors = [...tokenColors, ...themeColors].map((color) => {
-    console.log(color)
-    // todo remove opacity?
-    return color?.toLowerCase()
-  })
+  const colors = [...tokenColors, ...themeColors].map((color) => opaque(color)!)
 
   // order by count
   const colorCounts = colors.reduce((acc, color) => {
