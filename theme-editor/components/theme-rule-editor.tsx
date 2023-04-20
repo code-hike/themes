@@ -30,21 +30,31 @@ export function ThemeRuleEditor({
   function editTheme(color, fontStyle) {
     const matchedRule = getBestMatchRule(theme, token.scopes.slice().reverse())
 
-    const ruleIndex = theme.tokenColors.findIndex(
-      (r) => r.name === matchedRule.name && r.scope === matchedRule.scope
-    )
-    const newTokenColors = [
-      ...theme.tokenColors.slice(0, ruleIndex),
-      {
-        name: matchedRule.name,
-        scope: matchedRule.scope,
-        settings: {
-          foreground: color,
-          fontStyle,
+    let newTokenColors: any[] = []
+
+    if (!matchedRule) {
+      newTokenColors = [
+        { settings: { foreground: color, fontStyle } },
+        ...theme.tokenColors,
+      ]
+    } else {
+      const ruleIndex = theme.tokenColors.findIndex(
+        (r) => r.name === matchedRule.name && r.scope === matchedRule.scope
+      )
+      newTokenColors = [
+        ...theme.tokenColors.slice(0, ruleIndex),
+        {
+          name: matchedRule.name,
+          scope: matchedRule.scope,
+          settings: {
+            foreground: color,
+            fontStyle,
+          },
         },
-      },
-      ...theme.tokenColors.slice(ruleIndex + 1),
-    ]
+        ...theme.tokenColors.slice(ruleIndex + 1),
+      ]
+    }
+
     startTransition(() => {
       setTheme({
         ...theme,
