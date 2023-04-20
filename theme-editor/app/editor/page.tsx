@@ -15,7 +15,12 @@ const initialLang = "javascript"
 const initialTheme = darkPlus
 
 export default async function Page() {
-  const result = await highlight(codes[initialLang], initialLang, initialTheme)
+  const result = await highlight(
+    codes[initialLang],
+    initialLang,
+    initialTheme,
+    { scopes: true }
+  )
   const initialState = {
     selectedLangName: initialLang,
     langOptions: getLangOptions(),

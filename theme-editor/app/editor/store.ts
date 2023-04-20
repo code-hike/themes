@@ -108,7 +108,9 @@ export function createMyStore(initialState: State) {
     updateResult: () => {
       const { selectedLangName, rawTheme, codes } = get()
       const code = codes[selectedLangName]
-      const result = highlightSync(code, selectedLangName, rawTheme)
+      const result = highlightSync(code, selectedLangName, rawTheme, {
+        scopes: true,
+      })
       set((state) => {
         state.result = result
       })

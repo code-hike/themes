@@ -3,6 +3,7 @@ import { LANG_NAMES } from "@code-hike/lighter";
 const codes = {
   javascript: `
 // to edit the code click the pencil icon ☝️
+// click anywhere else to edit the colors
 function lorem(ipsum, dolor = 1) {
   const sit = ipsum == null ? 0 : ipsum.sit;
   dolor = sit - amet(dolor);

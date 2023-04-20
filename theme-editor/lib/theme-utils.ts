@@ -1,7 +1,17 @@
 export function getPalette(theme) {
-  const colors = theme.tokenColors
+  console.log("getPalette")
+  const tokenColors = theme.tokenColors
     .filter((rule) => rule.settings && rule.settings.foreground)
     .map((rule) => rule.settings.foreground.toUpperCase())
+
+  const themeColors = Object.values(theme?.colors || {})
+
+  const colors = [...tokenColors, ...themeColors].map((color) => {
+    console.log(color)
+    // todo remove opacity?
+    return color?.toLowerCase()
+  })
+
   // order by count
   const colorCounts = colors.reduce((acc, color) => {
     acc[color] = (acc[color] || 0) + 1
@@ -10,7 +20,7 @@ export function getPalette(theme) {
   const palette = Object.keys(colorCounts).sort(
     (a, b) => colorCounts[b] - colorCounts[a]
   )
-  return palette
+  return palette.slice(0, 8 * 6)
 }
 
 export function fixTheme(theme) {

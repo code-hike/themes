@@ -3,6 +3,7 @@ import { LANG_NAMES } from "@code-hike/lighter"
 const codes = {
   javascript: `
 // to edit the code click the pencil icon ☝️
+// click anywhere else to edit the colors
 function lorem(ipsum, dolor = 1) {
   const sit = ipsum == null ? 0 : ipsum.sit;
   dolor = sit - amet(dolor);
@@ -29,20 +30,20 @@ function consectetur(...adipiscing) {
   bat: "@echo Hello, World!",
   batch: "@echo off\n echo Hello, World!",
   berry: 'print("Hello, World!")',
-  be: "",
+  be: "Hello world",
   bibtex: "@article{example, title={Hello, World!}}",
   bicep: 'output example string = "Hello, World!"',
   blade: '@{{ "Hello, World!" }}',
   c: 'printf("Hello, World!");',
   cadence: "pub contract HelloWorld { }",
-  cdc: "",
+  cdc: "Hello world",
   clarity: `(print "Hello, World!")`,
   clojure: '(println "Hello, World!")',
   clj: '(println "Hello, World!")',
   cmake: 'message(STATUS "Hello, World!")',
   cobol: 'DISPLAY "Hello, World!"',
   codeql: "private module Hello { }",
-  ql: "",
+  ql: "Hello world",
   coffee: 'console.log "Hello, World!"',
   cpp: 'std::cout << "Hello, World!";',
   crystal: 'puts "Hello, World!"',
@@ -57,7 +58,7 @@ function consectetur(...adipiscing) {
   diff: "--- a/hello.txt\n+++ b/hello.txt\n+Hello, World!",
   docker: "FROM hello-world",
   dockerfile: "FROM hello-world",
-  "dream-maker": "",
+  "dream-maker": "Hello world",
   elixir: 'IO.puts("Hello, World!")',
   elm: 'text "Hello, World!"',
   erb: '<%= "Hello, World!" %>',
@@ -71,8 +72,8 @@ function consectetur(...adipiscing) {
   gdscript: 'print("Hello, World!")',
   gdshader: "void fn() { }",
   gherkin: 'Given a greeting "Hello, World!"',
-  "git-commit": "",
-  "git-rebase": "",
+  "git-commit": "Hello world",
+  "git-rebase": "Hello world",
   glsl: "const float hello = 20.0;",
   gnuplot: 'set label "Hello, World!" at screen 0.5,0.5',
   go: 'fmt.Println("Hello, World!")',
@@ -85,7 +86,7 @@ function consectetur(...adipiscing) {
   haskell: 'putStrLn "Hello, World!"',
   hs: 'putStrLn "Hello, World!"',
   hcl: 'variable "message" { default = "Hello, World!" }',
-  hlsl: "",
+  hlsl: "Hello world",
   html: "<h1>Hello, World!</h1>",
   http: "GET /hello/world HTTP/1.1",
   imba: 'tag hello\n def render <self> <h1> "Hello, World!"',
@@ -105,7 +106,7 @@ function consectetur(...adipiscing) {
   julia: 'println("Hello, World!")',
   kotlin: 'println("Hello, World!")',
   kusto: "let dt = datetime(2017-01-29 09:00:05);",
-  kql: "",
+  kql: "Hello world",
   latex: "\\textbf{Hello, World!}",
   less: 'body { &:before { content: "Hello, World!"; } }',
   liquid: '{{ "Hello, World!" }}',
@@ -131,7 +132,7 @@ graph TD;
   nix: 'builtins.trace "Hello, World!"',
   "objective-c": 'NSLog(@"Hello, World!");',
   objc: 'NSLog(@"Hello, World!");',
-  "objective-cpp": "",
+  "objective-cpp": "Hello world",
   ocaml: 'print_endline "Hello, World!";',
   pascal: 'WriteLn("Hello, World!");',
   perl: 'print "Hello, World!\n";',
@@ -161,7 +162,7 @@ datasource db {
   razor: '@("Hello, World!")',
   reg: 'REGEDIT4\n\n[HKEY_CURRENT_USERHello]\n"World"="Hello, World!"',
   rel: "def cg = CompleteGraph[range[1 ,5, 1]]",
-  riscv: "",
+  riscv: "Hello world",
   rst: "Hello, World!\n============",
   ruby: 'puts "Hello, World!"',
   rb: 'puts "Hello, World!"',
@@ -172,8 +173,8 @@ datasource db {
   scala: 'println("Hello, World!")',
   scheme: '(display "Hello, World!")',
   scss: 'body { &:before { content: "Hello, World!"; } }',
-  shaderlab: "",
-  shader: "",
+  shaderlab: "Hello world",
+  shader: "Hello world",
   shellscript: 'echo "Hello, World!"',
   bash: 'echo "Hello, World!"',
   console: 'echo "Hello, World!"',
@@ -191,7 +192,7 @@ datasource db {
   styl: 'body\n &:before\n content "Hello, World!"',
   svelte: "<h1>Hello, World!</h1>",
   swift: 'print("Hello, World!")',
-  "system-verilog": "",
+  "system-verilog": "Hello world",
   tasl: "class s:Person :: { }",
   tcl: 'puts "Hello, World!"',
   tex: "\textbf{Hello, World!}",
@@ -225,7 +226,7 @@ datasource db {
 
 LANG_NAMES.forEach((lang) => {
   if (!codes[lang]) {
-    codes[lang] = ""
+    codes[lang] = "Hello world"
     console.warn(`Missing code for ${lang}`)
   }
 })
