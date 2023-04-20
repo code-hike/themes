@@ -79,3 +79,26 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+.w-color-sketch {
+  background-color: hsl(213 31% 91%) !important;
+}
+
+.w-color-swatch {
+  gap: 4.6px !important;
+  border-top: none !important;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+.w-color-swatch > div {
+  margin-right: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+.w-color-editable-input > span {
+  color: black !important;
+}
+
+.w-color-editable-input > input {
+  text-align: center;
+}

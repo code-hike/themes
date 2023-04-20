@@ -20,7 +20,7 @@ export function getPalette(theme) {
   const palette = Object.keys(colorCounts).sort(
     (a, b) => colorCounts[b] - colorCounts[a]
   )
-  return palette.slice(0, 8 * 6)
+  return palette.slice(0, 13 * 5)
 }
 
 export function fixTheme(theme) {

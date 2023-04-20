@@ -1,5 +1,4 @@
 import { startTransition, useMemo, useRef, useState } from "react"
-import Sketch from "@uiw/react-color-sketch"
 
 import { getPalette } from "@/lib/theme-utils"
 import { Label } from "@/components/ui/label"
@@ -12,6 +11,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+
+import { ColorPicker } from "./ui/color-picker"
 
 export function ThemeColorsEditor({ colorKey, theme, setTheme, setSelection }) {
   const color = theme.colors[colorKey]
@@ -50,12 +51,11 @@ export function ThemeColorsEditor({ colorKey, theme, setTheme, setSelection }) {
           </SelectGroup>
         </SelectContent>
       </Select>
-      <Sketch
-        className="scheme-light text-black mx-auto mb-2"
+      <ColorPicker
         color={color}
-        presetColors={palette}
-        onChange={(color) => {
-          editTheme(color.hexa)
+        palette={palette}
+        onChange={(hexa) => {
+          editTheme(hexa)
         }}
       />
     </div>

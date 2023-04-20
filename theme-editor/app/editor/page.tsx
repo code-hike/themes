@@ -40,7 +40,7 @@ export default async function Page() {
           <Footer />
         </main>
 
-        <div className="h-full py-4 w-80 right-0 border-l">
+        <div className="h-full py-4 w-72 right-0 border-l">
           <SideColumn themes={builtInThemes} initialThemeName={"dark-plus"} />
         </div>
       </div>

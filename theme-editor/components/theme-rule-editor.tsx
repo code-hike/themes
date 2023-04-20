@@ -6,11 +6,11 @@ import {
   StrikethroughIcon,
   UnderlineIcon,
 } from "@radix-ui/react-icons"
-import Sketch from "@uiw/react-color-sketch"
 
 import { getBestMatchRule } from "@/lib/theme-matcher"
 import { getPalette } from "@/lib/theme-utils"
 
+import { ColorPicker } from "./ui/color-picker"
 import { Label } from "./ui/label"
 import { Toggle } from "./ui/toggle"
 
@@ -78,13 +78,12 @@ export function ThemeRuleEditor({
       </pre>
       {/* <Label className="mb-2 block">Edit Rule</Label> */}
       <div className="mb-4">
-        <Sketch
-          className="scheme-light text-black mx-auto mb-2"
+        <ColorPicker
           color={color}
-          presetColors={palette}
-          onChange={(color) => {
-            editTheme(color.hexa, fontStyle)
-            setColor(color.hexa)
+          palette={palette}
+          onChange={(hexa) => {
+            editTheme(hexa, fontStyle)
+            setColor(hexa)
           }}
         />
         <FontEditor
