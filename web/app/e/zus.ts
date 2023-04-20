@@ -1,6 +1,6 @@
 import { create, createStore } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { LangOption, getLangOptions } from "./languages";
+import { LangOption } from "./languages";
 import {
   preload,
   highlightSync,
