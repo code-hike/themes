@@ -56,7 +56,7 @@ export function CodeCanvas() {
           setSelection={setSelection}
         />
       )}
-      <Hoverboard background={getColor(theme, "editor.selectionBackground")} />
+      <Hoverboard background={"#BBC232BB"} />
     </div>
   )
 }
