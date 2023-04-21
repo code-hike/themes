@@ -1,6 +1,6 @@
 // import { parse } from "jsonc-parser/lib/esm/main.js";
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { parse } from "jsonc-parser"
 import { unzip } from "unzipit"
 
@@ -79,7 +79,12 @@ export function MarketplacePicker({ onBaseChange, isSponsor }) {
     </div>
   )
 }
+
+// const parserPromise =
+//   typeof window !== "undefined" ? import("jsonc-parser") : null
+
 async function fetchFromMarketplace(url: string) {
+  // const parse = (await parserPromise)!.parse
   const itemName = url.split("itemName=")[1]
   const [publisher, extId] = itemName.split(".")
   const downloadUrl =

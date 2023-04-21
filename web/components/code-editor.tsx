@@ -1,6 +1,6 @@
 import React from "react"
 import { highlightSync } from "@code-hike/lighter"
-import { CheckIcon } from "lucide-react"
+import { Check } from "lucide-react"
 
 import { getColor } from "@/lib/theme-colors"
 
@@ -75,7 +75,7 @@ export function CodeEditor({ code, lang, theme, onDone }) {
           className="z-50 mr-2"
           onClick={() => onDone(input)}
         >
-          <CheckIcon
+          <Check
             className=" opacity-80 hover:opacity-100 w-5 h-5"
             title="Edit Code"
           />

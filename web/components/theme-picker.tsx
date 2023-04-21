@@ -1,4 +1,5 @@
 import { useState } from "react"
+import dynamic from "next/dynamic"
 
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -7,7 +8,11 @@ import { Textarea } from "@/components/ui/textarea"
 
 import { SponsorsDialog } from "./sponsors-dialog"
 import { BuiltInThemePicker } from "./theme-picker.builtin"
-import { MarketplacePicker } from "./theme-picker.vscode"
+
+const DynamicMarketplacePicker = dynamic(
+  () => import("./theme-picker.vscode").then((mod) => mod.MarketplacePicker),
+  { ssr: false }
+)
 
 export function BaseThemePicker({ onBaseChange, sponsor, initialState }) {
   const [selectedTab, setSelectedTab] = useState("builtin")
@@ -44,7 +49,10 @@ export function BaseThemePicker({ onBaseChange, sponsor, initialState }) {
         />
       </div>
       <div className={selectedTab !== "vscode" ? "hidden" : ""}>
-        <MarketplacePicker onBaseChange={onBaseChange} isSponsor={isSponsor} />
+        <DynamicMarketplacePicker
+          onBaseChange={onBaseChange}
+          isSponsor={isSponsor}
+        />
       </div>
       <div className={selectedTab !== "custom" ? "hidden" : ""}>
         <CustomThemePicker onBaseChange={onBaseChange} isSponsor={isSponsor} />

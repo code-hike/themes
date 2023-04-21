@@ -1,4 +1,4 @@
-import { PencilIcon } from "lucide-react"
+import { Pencil } from "lucide-react"
 
 import { getColor } from "@/lib/theme-colors"
 
@@ -58,7 +58,7 @@ export function CodeBar({ theme, editing, setEditing, setSelection }) {
         className="ml-auto mr-2"
         style={{ display: editing ? "none" : "block" }}
       >
-        <PencilIcon
+        <Pencil
           style={{
             color: getColor(theme, "icon.foreground"),
           }}
