@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
+import { useMemo, useState } from "react"
 
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -9,16 +9,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useTheme } from "./store";
-import { useMemo, useState } from "react";
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Textarea } from "@/components/ui/textarea"
 
-export function ExportDialog() {
-  const theme = useTheme();
-  const [format, setFormat] = useState<string>("js");
-  const output = useOutput(theme, format);
+export function ExportDialog({ theme }) {
+  const [format, setFormat] = useState<string>("js")
+  const output = useOutput(theme, format)
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -26,12 +24,12 @@ export function ExportDialog() {
           Export Theme...
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] min-h-[80vh] flex flex-col">
         <DialogHeader>
           <DialogTitle>Export Theme</DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
+        <div className="flex gap-4 py-4 flex-col flex-1">
           <RadioGroup
             value={format}
             className="justify-around"
@@ -54,43 +52,43 @@ export function ExportDialog() {
               <Label htmlFor="r4">CJS</Label>
             </div>
           </RadioGroup>
-          <Textarea value={output} readOnly rows={10} />
+          <Textarea value={output} readOnly className="flex-1" />
         </div>
 
         <DialogFooter>
-          <Button onClick={() => copyToClipboard(output)}>Copy</Button>
+          <Button onClick={() => copyToClipboard(output!)}>Copy</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  );
+  )
 }
 
 function useOutput(theme: any, format: string) {
   return useMemo(() => {
-    const themeString = JSON.stringify(theme, null, 2);
+    const themeString = JSON.stringify(theme, null, 2)
     switch (format) {
       case "js":
-        return `const myTheme = ${themeString};`;
+        return `const myTheme = ${themeString};`
       case "json":
-        return themeString;
+        return themeString
       case "esm":
-        return `export default ${themeString};`;
+        return `export default ${themeString};`
       case "cjs":
-        return `module.exports = ${themeString};`;
+        return `module.exports = ${themeString};`
     }
-  }, [format, theme]);
+  }, [format, theme])
 }
 
 function copyToClipboard(text: string) {
   if (navigator.clipboard) {
-    navigator.clipboard.writeText(text);
+    navigator.clipboard.writeText(text)
   } else {
-    const textArea = document.createElement("textarea");
-    textArea.value = text;
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textArea);
+    const textArea = document.createElement("textarea")
+    textArea.value = text
+    document.body.appendChild(textArea)
+    textArea.focus()
+    textArea.select()
+    document.execCommand("copy")
+    document.body.removeChild(textArea)
   }
 }
