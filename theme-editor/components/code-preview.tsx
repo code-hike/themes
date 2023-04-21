@@ -1,10 +1,13 @@
 import { getColor } from "@/lib/theme-colors"
 
+import { handleMouseEnter } from "./hoverboard"
+
 export function CodePreview({ lines, theme, setSelection }) {
   const currentLines = lines
   const lineCount = currentLines.length
   const lineDigits = lineCount.toString().length
   const lineNumberColor = getColor(theme, "editorLineNumber.foreground")
+
   return (
     <div
       id="code-preview"
@@ -13,6 +16,7 @@ export function CodePreview({ lines, theme, setSelection }) {
         overflow: "auto",
         maxHeight: "80vh",
       }}
+      onMouseOver={handleMouseEnter}
     >
       <pre
         className="p-2 cursor-pointer"
@@ -24,7 +28,8 @@ export function CodePreview({ lines, theme, setSelection }) {
           {currentLines.map((l, i) => (
             <div key={i}>
               <span
-                className="hover:outline-dotted cursor-pointer"
+                className="cursor-pointer"
+                onMouseOver={handleMouseEnter}
                 onClick={(e) => {
                   e.stopPropagation()
                   setSelection({
@@ -45,7 +50,8 @@ export function CodePreview({ lines, theme, setSelection }) {
               </span>
               {l.map((t, j) => (
                 <span
-                  className="hover:outline-dotted cursor-pointer"
+                  className="cursor-pointer py-[2.8px]"
+                  onMouseOver={handleMouseEnter}
                   key={j}
                   style={t.style}
                   children={t.content}

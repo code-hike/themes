@@ -2,6 +2,8 @@ import { PencilIcon } from "lucide-react"
 
 import { getColor } from "@/lib/theme-colors"
 
+import { handleMouseEnter, hideHoverboard } from "./hoverboard"
+
 export function CodeBar({ theme, editing, setEditing, setSelection }) {
   return (
     <div
@@ -18,6 +20,7 @@ export function CodeBar({ theme, editing, setEditing, setSelection }) {
           key: "editorGroupHeader.tabsBackground",
         })
       }}
+      onMouseOver={handleMouseEnter}
     >
       <Tab active={false} theme={theme} setSelection={setSelection} />
       <Tab active={true} theme={theme} setSelection={setSelection} />
@@ -32,7 +35,7 @@ export function CodeBar({ theme, editing, setEditing, setSelection }) {
           zIndex: 9,
           background: getColor(theme, "editorGroupHeader.tabsBorder"),
         }}
-        className="hover:outline-dotted cursor-pointer"
+        onMouseOver={handleMouseEnter}
       ></div>
       <button
         onClick={() => setEditing((x) => !x)}
@@ -43,6 +46,7 @@ export function CodeBar({ theme, editing, setEditing, setSelection }) {
           style={{
             color: getColor(theme, "icon.foreground"),
           }}
+          onMouseOver={hideHoverboard}
           className="opacity-70 hover:opacity-100 w-5 h-5 "
         />
       </button>
@@ -77,6 +81,7 @@ function Tab({ active, theme, setSelection }) {
           key: backgroundKey,
         })
       }}
+      onMouseOver={handleMouseEnter}
     >
       <span
         onClick={(e) => {
@@ -86,6 +91,7 @@ function Tab({ active, theme, setSelection }) {
             key: foregroundKey,
           })
         }}
+        onMouseOver={handleMouseEnter}
       >
         {active ? "Active Tab" : "Inactive Tab"}
       </span>

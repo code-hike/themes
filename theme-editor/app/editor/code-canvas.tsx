@@ -3,6 +3,7 @@ import { fixTheme } from "@/lib/theme-utils"
 import { CodeBar } from "@/components/code-bar"
 import { CodeEditor } from "@/components/code-editor"
 import { CodePreview } from "@/components/code-preview"
+import { Hoverboard, hideHoverboard } from "@/components/hoverboard"
 
 import { useSelector } from "./store-provider"
 
@@ -15,6 +16,7 @@ export function CodeCanvas() {
   const code = useSelector((state) => state.codes[state.selectedLangName])
   const updateCode = useSelector((state) => state.updateCode)
   const setSelection = useSelector((state) => state.setSelection)
+
   return (
     <div
       className="rounded overflow-hidden z-10"
@@ -22,6 +24,7 @@ export function CodeCanvas() {
         minWidth: "40ch",
         maxWidth: "80ch",
       }}
+      onMouseLeave={hideHoverboard}
     >
       <style
         dangerouslySetInnerHTML={{
@@ -53,6 +56,7 @@ export function CodeCanvas() {
           setSelection={setSelection}
         />
       )}
+      <Hoverboard background={getColor(theme, "editor.selectionBackground")} />
     </div>
   )
 }
