@@ -61,6 +61,7 @@ export function createMyStore(initialState: State) {
           ({ name }) => name === langName
         )!
         langOption.status = status
+        langOption.used = true
       })
     },
     setTheme: (theme: RawTheme) => {

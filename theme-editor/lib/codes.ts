@@ -45,12 +45,53 @@ function consectetur(...adipiscing) {
   codeql: "private module Hello { }",
   ql: "Hello world",
   coffee: 'console.log "Hello, World!"',
-  cpp: 'std::cout << "Hello, World!";',
+  cpp: `
+// to edit the code click the pencil icon ☝️
+// click anywhere else to edit the colors
+#include <iostream>
+
+int main() {
+    int num1, num2, sum;
+    std::cout << "Enter two integers: ";
+    std::cin >> num1 >> num2;
+    sum = num1 + num2;
+    std::cout << "Sum: " << sum << std::endl;
+    return 0;
+}
+`.trim(),
   crystal: 'puts "Hello, World!"',
-  csharp: 'Console.WriteLine("Hello, World!");',
+  csharp: `
+using System;
+
+class MainClass {
+    static string Greet(string name) {
+        return $"Hello, {name}!";
+    }
+
+    public static void Main(string[] args) {
+        string name = "John Doe";
+        Console.WriteLine(Greet(name));
+    }
+}
+`,
   "c#": 'Console.WriteLine("Hello, World!");',
   cs: 'Console.WriteLine("Hello, World!");',
-  css: 'body::before { content: "Hello, World!"; }',
+  css: `
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+}
+
+p:last-child {
+  margin-bottom: 0;
+  font-weight: bold;
+}
+`.trim(),
   cue: 'example: "Hello, World!"',
   d: 'writeln("Hello, World!");',
   dart: 'print("Hello, World!");',
@@ -76,7 +117,24 @@ function consectetur(...adipiscing) {
   "git-rebase": "Hello world",
   glsl: "const float hello = 20.0;",
   gnuplot: 'set label "Hello, World!" at screen 0.5,0.5',
-  go: 'fmt.Println("Hello, World!")',
+  go: `
+package main
+
+import (
+  "fmt"
+  "math"
+)
+
+func greet(name string) string {
+  return "Hello, " + name + "!"
+}
+
+func main() {
+  name := "John Doe"
+  fmt.Println(greet(name))
+  fmt.Printf(math.Sqrt(9))
+}
+`.trim(),
   graphql: "{ helloWorld }",
   groovy: 'println "Hello, World!"',
   hack: 'echo "Hello, World!";',
@@ -87,12 +145,37 @@ function consectetur(...adipiscing) {
   hs: 'putStrLn "Hello, World!"',
   hcl: 'variable "message" { default = "Hello, World!" }',
   hlsl: "Hello world",
-  html: "<h1>Hello, World!</h1>",
+  html: `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Page</title>
+</head>
+<body>
+  <h1 id="greeting">Hello, World!</h1>
+  <p class="content">Welcome</p>
+</body>
+</html>
+`.trim(),
   http: "GET /hello/world HTTP/1.1",
   imba: 'tag hello\n def render <self> <h1> "Hello, World!"',
   ini: 'greeting = "Hello, World!"',
   properties: "greeting = Hello, World!",
-  java: 'System.out.println("Hello, World!");',
+  java: `
+import java.lang.Math;
+
+public class Main {
+    static String greet(String name) {
+        return "Hello, " + name + "!";
+    }
+
+    public static void main(String[] args) {
+        String name = "John Doe";
+        System.out.println(greet(name));
+    }
+}
+`.trim(),
   js: 'console.log("Hello, World!");',
   "jinja-html": '{{ "Hello, World!" }}',
   jison: "%lex",
@@ -119,7 +202,18 @@ function consectetur(...adipiscing) {
   md: "# Hello, World!",
   marko: "<h1>Hello, World!</h1>",
   matlab: 'disp("Hello, World!");',
-  mdx: "# Hello, World!",
+  mdx: `
+import {Chart} from './snowfall.js'
+export const year = 2018
+
+# Last year’s snowfall
+
+In {year}, the snowfall was above average.
+It was followed by a warm spring which caused
+flood conditions in many of the nearby rivers.
+
+<Chart year={year} color="#fcb32c" />
+`.trim(),
   mermaid: `
 graph TD;
   A-->B;
@@ -154,8 +248,32 @@ datasource db {
   jade: "p Hello, World!",
   puppet: 'notify { "Hello, World!": }',
   purescript: 'main = log "Hello, World!"',
-  python: 'print("Hello, World!")',
-  py: 'print("Hello, World!")',
+  python: `
+# to edit the code click the pencil icon ☝️
+# click anywhere else to edit the colors
+import math
+
+def greet(name: str) -> str:
+    return f"Hello, {name}!"
+
+if __name__ == "__main__":
+    name = input("Enter your name: ")
+    print(greet(name))
+    squared = math.pow(5, 2)
+    print(f"5 squared is: {squared}")
+`.trim(),
+  py: `
+  import math
+  
+  def greet(name: str) -> str:
+      return f"Hello, {name}!"
+  
+  if __name__ == "__main__":
+      name = input("Enter your name: ")
+      print(greet(name))
+      squared = math.pow(5, 2)
+      print(f"5 squared is: {squared}")
+  `.trim(),
   r: 'cat("Hello, World!\n")',
   raku: 'say "Hello, World!";',
   perl6: 'say "Hello, World!";',
@@ -166,7 +284,19 @@ datasource db {
   rst: "Hello, World!\n============",
   ruby: 'puts "Hello, World!"',
   rb: 'puts "Hello, World!"',
-  rust: 'println!("Hello, World!");',
+  rust: `
+use std::f64;
+
+fn greet(name: &str) -> String {
+    format!("Hello, {}!", name)
+}
+
+fn main() {
+    let name = "John Doe";
+    println!("{}", greet(name));
+    println!(f64::sqrt(9.0));
+}
+`.trim(),
   rs: 'println!("Hello, World!");',
   sas: 'data null; put "Hello, World!"; run;',
   sass: 'body\n &:before\n content: "Hello, World!"',
@@ -201,7 +331,23 @@ datasource db {
   turtle:
     '@prefix : http://example.org/ .\n:subject :predicate "Hello, World!" .',
   twig: '{{ "Hello, World!" }}',
-  typescript: 'console.log("Hello, World!");',
+  typescript: `
+// to edit the code click the pencil icon ☝️
+// click anywhere else to edit the colors
+import { sqrt } from 'mathjs';
+
+interface Person {
+  name: string;
+}
+
+function greet(person: Person): string {
+  return \`Hello, \${person.name}!\`;
+}
+
+const person: Person = { name: 'John Doe' };
+console.log(greet(person));
+console.log(\`Square root of 9 is: \${sqrt(9)}\`);
+`.trim(),
   ts: 'console.log("Hello, World!");',
   v: 'println("Hello, World!")',
   vb: 'Console.WriteLine("Hello, World!")',

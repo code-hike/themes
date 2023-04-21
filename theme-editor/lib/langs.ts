@@ -9,12 +9,12 @@ export type LangOption = {
 
 export function getLangOptions(): LangOption[] {
   const options: LangOption[] = []
-  for (const lang of popular) {
-    options.push({ name: lang, status: "empty", popular: true })
-  }
   for (const lang of aliases) {
-    if (popular.includes(lang)) continue
-    options.push({ name: lang, status: "empty" })
+    options.push({
+      name: lang,
+      status: "empty",
+      popular: popular.includes(lang),
+    })
   }
   return options
 }

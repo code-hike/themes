@@ -23,6 +23,8 @@ import { Spinner } from "@/components/ui/spinner"
 export type LangOption = {
   name: string
   status: "empty" | "loading" | "loaded"
+  popular?: boolean
+  used?: boolean
 }
 
 export function LanguagePicker({
@@ -35,6 +37,9 @@ export function LanguagePicker({
   onSelected: (lang: LangOption) => void
 }) {
   const [open, setOpen] = React.useState(false)
+  const used = langs.filter((item) => item.used)
+  const popular = langs.filter((item) => !item.used && item.popular)
+  const others = langs.filter((item) => !item.popular && !item.used)
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -60,25 +65,54 @@ export function LanguagePicker({
           <CommandInput placeholder="Search..." />
           <ScrollArea style={{ height: "50vh" }}>
             <CommandEmpty>No language found.</CommandEmpty>
-            <CommandGroup>
-              {langs.map((item) => (
-                <LangItem
-                  key={item.name}
-                  item={item}
-                  selected={selected}
-                  onSelect={(currentValue) => {
-                    setOpen(false)
-                    onSelected(
-                      langs.find((item) => item.name === currentValue)!
-                    )
-                  }}
-                />
-              ))}
-            </CommandGroup>
+
+            <Group
+              heading="Recently used"
+              options={used}
+              selected={selected}
+              onSelect={(currentValue) => {
+                setOpen(false)
+                onSelected(used.find((item) => item.name === currentValue)!)
+              }}
+            />
+            <Group
+              heading="Popular"
+              options={popular}
+              selected={selected}
+              onSelect={(currentValue) => {
+                setOpen(false)
+                onSelected(popular.find((item) => item.name === currentValue)!)
+              }}
+            />
+            <Group
+              heading="Rest"
+              options={others}
+              selected={selected}
+              onSelect={(currentValue) => {
+                setOpen(false)
+                onSelected(others.find((item) => item.name === currentValue)!)
+              }}
+            />
           </ScrollArea>
         </Command>
       </PopoverContent>
     </Popover>
+  )
+}
+
+function Group({ heading, options, selected, onSelect }) {
+  if (options.length === 0) return null
+  return (
+    <CommandGroup heading={heading}>
+      {options.map((item) => (
+        <LangItem
+          key={item.name}
+          item={item}
+          selected={selected}
+          onSelect={onSelect}
+        />
+      ))}
+    </CommandGroup>
   )
 }
 

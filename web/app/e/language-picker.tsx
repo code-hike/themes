@@ -22,6 +22,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 export type LangOption = {
   name: string;
   status: "empty" | "loading" | "loaded" | "used";
+  popular?: boolean;
 };
 
 export function LanguagePicker({
@@ -34,6 +35,9 @@ export function LanguagePicker({
   onSelected: (lang: LangOption) => void;
 }) {
   const [open, setOpen] = React.useState(false);
+
+  const popular = langs.filter((item) => item.popular);
+  const others = langs.filter((item) => !item.popular);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -60,7 +64,7 @@ export function LanguagePicker({
           <ScrollArea style={{ height: "50vh" }}>
             <CommandEmpty>No language found.</CommandEmpty>
             <CommandGroup>
-              {langs.map((item) => (
+              {popular.map((item) => (
                 <LangItem
                   key={item.name}
                   item={item}
