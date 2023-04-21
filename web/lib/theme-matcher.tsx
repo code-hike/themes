@@ -7,7 +7,10 @@ export function getBestMatchRule(theme: any, scopes: string[]) {
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i]
     const score = scopesMatchesRule(scopes, rule)
-    if (score >= bestScore) {
+    // if (score >= 0) {
+    //   console.log(rule, score)
+    // }
+    if (score > 0 && score >= bestScore) {
       bestScore = score
       bestRule = rule
     }

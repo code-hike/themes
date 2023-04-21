@@ -30,6 +30,8 @@ export function ThemeRuleEditor({
   function editTheme(color, fontStyle) {
     const matchedRule = getBestMatchRule(theme, token.scopes.slice().reverse())
 
+    // console.log(token, matchedRule)
+
     let newTokenColors: any[] = []
 
     if (!matchedRule) {
