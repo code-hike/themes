@@ -35,8 +35,24 @@ export function CodeBar({ theme, editing, setEditing, setSelection }) {
           zIndex: 9,
           background: getColor(theme, "editorGroupHeader.tabsBorder"),
         }}
-        onMouseOver={handleMouseEnter}
-      ></div>
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: -4,
+            bottom: -4,
+            width: "100%",
+          }}
+          onMouseOver={handleMouseEnter}
+          onClick={(e) => {
+            e.stopPropagation()
+            setSelection({
+              type: "color",
+              key: "editorGroupHeader.tabsBorder",
+            })
+          }}
+        ></div>
+      </div>
       <button
         onClick={() => setEditing((x) => !x)}
         className="ml-auto mr-2"
@@ -106,7 +122,24 @@ function Tab({ active, theme, setSelection }) {
             width: "100%",
             background: getColor(theme, "tab.activeBorder"),
           }}
-        />
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: -4,
+              bottom: -4,
+              width: "100%",
+            }}
+            onMouseOver={handleMouseEnter}
+            onClick={(e) => {
+              e.stopPropagation()
+              setSelection({
+                type: "color",
+                key: "tab.activeBorder",
+              })
+            }}
+          />
+        </div>
       )}
       {active && (
         <div
@@ -119,8 +152,43 @@ function Tab({ active, theme, setSelection }) {
             width: "100%",
             background: getColor(theme, "tab.activeBorderTop"),
           }}
-        />
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: -4,
+              bottom: -4,
+              width: "100%",
+            }}
+            onMouseOver={handleMouseEnter}
+            onClick={(e) => {
+              e.stopPropagation()
+              setSelection({
+                type: "color",
+                key: "tab.activeBorderTop",
+              })
+            }}
+          />
+        </div>
       )}
+
+      <div
+        style={{
+          position: "absolute",
+          right: -5,
+          width: 9,
+          top: 0,
+          height: "100%",
+        }}
+        onMouseOver={handleMouseEnter}
+        onClick={(e) => {
+          e.stopPropagation()
+          setSelection({
+            type: "color",
+            key: "tab.border",
+          })
+        }}
+      />
     </span>
   )
 }
