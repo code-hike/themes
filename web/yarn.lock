@@ -198,6 +198,11 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
+"@code-hike/lighter@0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@code-hike/lighter/-/lighter-0.6.2.tgz#3f5cb79de86878ae0540ea36635591a7d8a82fbb"
+  integrity sha512-yGzUE63b6dRIZFZ5Bn5XKRDsWQSNkGTvYSBZi0lXm2KSI3JKyM32DEns9Oe7aHQF/lf43+r5LjHoBY5K19+Sgw==
+
 "@code-hike/lighter@0.6.6":
   version "0.6.6"
   resolved "https://registry.yarnpkg.com/@code-hike/lighter/-/lighter-0.6.6.tgz#72f1b93dceacc40022a0c2c0f154363e2595a4ba"
@@ -1031,6 +1036,14 @@ braces@^3.0.2, braces@~3.0.2:
   integrity sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==
   dependencies:
     fill-range "^7.0.1"
+
+bright@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/bright/-/bright-0.7.1.tgz#187e5a8d22a74a7f111e542330e1f1dbd44ecacc"
+  integrity sha512-NgbD0zCXZFrwJ+bewYYb3OGvpbMK/Cd1m0ntMutDyLSahmAHWElPKpM7tusjEdtv45dNS/g36/8KyFuSZlS3zw==
+  dependencies:
+    "@code-hike/lighter" "0.6.2"
+    server-only "^0.0.1"
 
 browserslist@^4.21.3, browserslist@^4.21.5:
   version "4.21.5"
@@ -1948,6 +1961,11 @@ semver@^7.3.5, semver@^7.3.7, semver@^7.3.8:
   integrity sha512-+XC0AD/R7Q2mPSRuy2Id0+CGTZ98+8f+KvwirxOKIEyid+XSx6HbC63p+O4IndTHuX5Z+JxQ0TghCkO5Cg/2HA==
   dependencies:
     lru-cache "^6.0.0"
+
+server-only@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/server-only/-/server-only-0.0.1.tgz#0f366bb6afb618c37c9255a314535dc412cd1c9e"
+  integrity sha512-qepMx2JxAa5jjfzxG79yPPq+8BuFToHd1hm7kI+Z4zAq1ftQiP7HcxMhDDItrbtwVeLg/cY2JnKnrcFkmiswNA==
 
 sharp@^0.31.3:
   version "0.31.3"
