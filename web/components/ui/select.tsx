@@ -29,7 +29,7 @@ const SelectTrigger = React.forwardRef<
     <span className="absolute left-3 flex items-center justify-center">
       {icon || <Check className="h-4 w-4" />}
     </span>
-    {children}
+    <span className="truncate min-w-0">{children}</span>
     <SelectPrimitive.Icon asChild>
       <ChevronDown className="h-4 w-4 opacity-50" />
     </SelectPrimitive.Icon>
