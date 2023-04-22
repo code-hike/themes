@@ -77,11 +77,13 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    color-scheme: dark;
   }
 }
 
 .w-color-sketch {
   background-color: hsl(213 31% 91%) !important;
+  color-scheme: light;
 }
 
 .w-color-swatch {

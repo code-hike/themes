@@ -13,7 +13,10 @@ export function getColor(theme: FinalTheme, name: string) {
     return getColor(theme, defaultColors)
   }
 
-  return getDefault(theme, defaultColors)
+  const result = getDefault(theme, defaultColors)
+  // console.log("getColor", name, result)
+
+  return result
 }
 
 function getDefault(theme: FinalTheme, defaults) {
@@ -107,5 +110,14 @@ const defaults = {
     dark: "#AEAFAD",
     light: "#000000",
     hc: "#ffffff",
+  },
+  "editor.infoForeground": {
+    dark: "#3794FF",
+    light: "#1a85ff",
+    hc: "#3794FF",
+  },
+  "editor.rangeHighlightBackground": {
+    dark: "#ffffff0b",
+    light: "#fdff0033",
   },
 }

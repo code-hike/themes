@@ -1,6 +1,7 @@
 import { startTransition, useMemo, useRef, useState } from "react"
 
-import { getPalette } from "@/lib/theme-utils"
+import { getColor } from "@/lib/theme-colors"
+import { fixTheme, getPalette } from "@/lib/theme-utils"
 import { Label } from "@/components/ui/label"
 import {
   Select,
@@ -15,7 +16,7 @@ import {
 import { ColorPicker } from "./ui/color-picker"
 
 export function ThemeColorsEditor({ colorKey, theme, setTheme, setSelection }) {
-  const color = theme.colors[colorKey]
+  const color = getColor(fixTheme(theme), colorKey)
   const palette = useMemo(() => getPalette(theme), [])
 
   function editTheme(color) {
@@ -76,4 +77,6 @@ const colorKeys = [
   "tab.activeBorderTop",
   "editorGroupHeader.tabsBorder",
   "editor.selectionBackground",
+  "editor.infoForeground",
+  "editor.rangeHighlightBackground",
 ]
