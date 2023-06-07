@@ -1,31 +1,44 @@
 const { getEditorColor } = require("./lib/theme-colors");
 
-const dark = require("./material-darker.json");
-const light = require("./material-lighter.json");
-const name = "material-from-css";
+// const dark = require("./material-darker.json");
+// const light = require("./material-lighter.json");
+// const name = "material-from-css";
+
+const dark = require("./github-dark.json");
+const light = require("./github-light.json");
+const name = "github-from-css";
 
 const editorColorsToKeep = [
   "editor.background",
   "editor.foreground",
-  "editor.selectionBackground",
-  "editor.infoForeground",
+  "editor.lineHighlightBackground",
   "editor.rangeHighlightBackground",
-  "editorLineNumber.foreground",
+  "editor.infoForeground",
+  "editor.selectionBackground",
+  "focusBorder",
   "tab.activeBackground",
-  "tab.inactiveBackground",
   "tab.activeForeground",
+  "tab.inactiveBackground",
   "tab.inactiveForeground",
   "tab.border",
   "tab.activeBorder",
-  "tab.activeBorderTop",
-  "tab.hoverBackground",
-  "tab.hoverForeground",
-  "editorGroupHeader.tabsBorder",
+  "editorGroup.border",
   "editorGroupHeader.tabsBackground",
-  "list.inactiveSelectionBackground",
-  "list.inactiveSelectionForeground",
+  "editorLineNumber.foreground",
+  "input.background",
+  "input.foreground",
+  "input.border",
+  "icon.foreground",
+  "sideBar.background",
+  "sideBar.foreground",
+  "sideBar.border",
+  "list.activeSelectionBackground",
+  "list.activeSelectionForeground",
   "list.hoverBackground",
   "list.hoverForeground",
+  "foreground",
+  "background",
+  "lighter.inlineBackground",
 ];
 
 const colorMap = {};
@@ -105,6 +118,7 @@ function merge(dark, light) {
 
   return {
     name,
+    author: dark.author,
     type: "from-css",
     tokenColors: newRules,
     colors,
